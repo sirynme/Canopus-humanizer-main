@@ -21,11 +21,12 @@ class ChangePlanner:
         rules: Sequence[Tuple[str, RuleDefinition]],
         protected_spans: Sequence[ProtectedSpan] = (),
         placeholder_tokens: Sequence[str] = (),
+        opportunities: Optional[Sequence[Any]] = None,
     ) -> Tuple[Tuple[Change, ...], Tuple[ValidationIssue, ...]]:
         """
         Generates an approved list of non-conflicting transformations.
         Deterministic guarantees:
-        1. All candidate matches generated across all enabled rules.
+        1. All candidate matches generated across all enabled rules (or provided opportunities).
         2. Filter out matches that intersect protected spans or placeholders.
         3. Sort candidates by:
            - Priority (descending)
@@ -38,11 +39,17 @@ class ChangePlanner:
         all_candidates: List[Change] = []
         rule_map = {}
 
-        # 1. Collect candidate matches
         for ruleset_id, rule in rules:
             rule_map[rule.id] = rule
-            matches = find_candidate_matches(text, rule)
-            all_candidates.extend(matches)
+
+        if opportunities is not None:
+            for opp in opportunities:
+                all_candidates.append(opp.change)
+        else:
+            # 1. Collect candidate matches
+            for ruleset_id, rule in rules:
+                matches = find_candidate_matches(text, rule)
+                all_candidates.extend(matches)
 
         # 2. Identify forbidden ranges (placeholders and protected regions)
         forbidden_ranges: List[Tuple[int, int]] = []

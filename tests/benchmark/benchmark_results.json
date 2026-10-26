@@ -1,0 +1,161 @@
+{
+  "benchmark_version": "4.0.0",
+  "timestamp": 1793035656.9345133,
+  "total_samples": 7,
+  "results": [
+    {
+      "id": "academic_literature_review_01",
+      "category": "academic",
+      "original_char_count": 337,
+      "v4_accepted": true,
+      "v4_changes_count": 5,
+      "v4_preservation_rate": 1.0,
+      "v4_transformation_rate": 1.0,
+      "v4_banned_terms_detected": [],
+      "v4_unnecessary_edits": 0,
+      "v4_latency_ms": 19.85,
+      "legacy_changes_count": 5,
+      "legacy_preservation_rate": 1.0,
+      "legacy_banned_terms_detected": [],
+      "legacy_latency_ms": 11.75,
+      "readability": {
+        "original_flesch": 41.19166666666669,
+        "legacy_flesch": 21.73333333333335,
+        "v4_flesch": 25.333333333333343
+      }
+    },
+    {
+      "id": "technical_algorithms_02",
+      "category": "technical",
+      "original_char_count": 286,
+      "v4_accepted": true,
+      "v4_changes_count": 4,
+      "v4_preservation_rate": 1.0,
+      "v4_transformation_rate": 1.0,
+      "v4_banned_terms_detected": [],
+      "v4_unnecessary_edits": 0,
+      "v4_latency_ms": 5.25,
+      "legacy_changes_count": 9,
+      "legacy_preservation_rate": 1.0,
+      "legacy_banned_terms_detected": [],
+      "legacy_latency_ms": 1.8,
+      "readability": {
+        "original_flesch": 64.21993197278914,
+        "legacy_flesch": 63.12560606060609,
+        "v4_flesch": 66.97106060606063
+      }
+    },
+    {
+      "id": "general_essay_argument_03",
+      "category": "general_essay",
+      "original_char_count": 260,
+      "v4_accepted": true,
+      "v4_changes_count": 6,
+      "v4_preservation_rate": 1.0,
+      "v4_transformation_rate": 1.0,
+      "v4_banned_terms_detected": [],
+      "v4_unnecessary_edits": 0,
+      "v4_latency_ms": 3.61,
+      "legacy_changes_count": 15,
+      "legacy_preservation_rate": 1.0,
+      "legacy_banned_terms_detected": [
+        "Importantly this trend"
+      ],
+      "legacy_latency_ms": 3.5,
+      "readability": {
+        "original_flesch": 36.14382113821139,
+        "legacy_flesch": -18.852528735632177,
+        "v4_flesch": -18.852528735632177
+      }
+    },
+    {
+      "id": "clear_well_written_passage_04",
+      "category": "clear_well_written",
+      "original_char_count": 149,
+      "v4_accepted": true,
+      "v4_changes_count": 0,
+      "v4_preservation_rate": 1.0,
+      "v4_transformation_rate": 1.0,
+      "v4_banned_terms_detected": [],
+      "v4_unnecessary_edits": 0,
+      "v4_latency_ms": 3.46,
+      "legacy_changes_count": 16,
+      "legacy_preservation_rate": 0.5,
+      "legacy_banned_terms_detected": [],
+      "legacy_latency_ms": 1.16,
+      "readability": {
+        "original_flesch": 26.97750000000002,
+        "legacy_flesch": 22.94892857142861,
+        "v4_flesch": 26.97750000000002
+      }
+    },
+    {
+      "id": "grammar_and_awkward_corrections_05",
+      "category": "grammar_awkward",
+      "original_char_count": 167,
+      "v4_accepted": true,
+      "v4_changes_count": 4,
+      "v4_preservation_rate": 1.0,
+      "v4_transformation_rate": 1.0,
+      "v4_banned_terms_detected": [],
+      "v4_unnecessary_edits": 0,
+      "v4_latency_ms": 2.69,
+      "legacy_changes_count": 17,
+      "legacy_preservation_rate": 1.0,
+      "legacy_banned_terms_detected": [
+        "Irregardless",
+        "could of",
+        "criteria is",
+        "comprise of"
+      ],
+      "legacy_latency_ms": 1.37,
+      "readability": {
+        "original_flesch": 39.55500000000001,
+        "legacy_flesch": 32.504999999999995,
+        "v4_flesch": 40.67554347826092
+      }
+    },
+    {
+      "id": "multi_paragraph_long_document_06",
+      "category": "multi_paragraph_long",
+      "original_char_count": 525,
+      "v4_accepted": true,
+      "v4_changes_count": 6,
+      "v4_preservation_rate": 1.0,
+      "v4_transformation_rate": 1.0,
+      "v4_banned_terms_detected": [],
+      "v4_unnecessary_edits": 0,
+      "v4_latency_ms": 8.78,
+      "legacy_changes_count": 23,
+      "legacy_preservation_rate": 1.0,
+      "legacy_banned_terms_detected": [],
+      "legacy_latency_ms": 5.14,
+      "readability": {
+        "original_flesch": 37.385818181818195,
+        "legacy_flesch": 21.50862686567166,
+        "v4_flesch": 21.50862686567166
+      }
+    },
+    {
+      "id": "citations_equations_terminology_heavy_07",
+      "category": "citations_math_numbers",
+      "original_char_count": 267,
+      "v4_accepted": true,
+      "v4_changes_count": 0,
+      "v4_preservation_rate": 1.0,
+      "v4_transformation_rate": 1.0,
+      "v4_banned_terms_detected": [],
+      "v4_unnecessary_edits": 0,
+      "v4_latency_ms": 4.15,
+      "legacy_changes_count": 24,
+      "legacy_preservation_rate": 1.0,
+      "legacy_banned_terms_detected": [],
+      "legacy_latency_ms": 1.06,
+      "readability": {
+        "original_flesch": 43.35668604651164,
+        "legacy_flesch": 47.2915697674419,
+        "v4_flesch": 43.35668604651164
+      }
+    }
+  ]
+}

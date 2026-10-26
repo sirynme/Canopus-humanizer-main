@@ -18,7 +18,7 @@ from canopus_humanizer.rules.loader import RulesetLoader
 from canopus_humanizer.rules.registry import RuleRegistry
 
 
-ENGINE_VERSION = "1.0.0"
+ENGINE_VERSION = "4.0.0 (v1.0.0-compatible)"
 
 
 def cmd_transform(args: argparse.Namespace) -> int:

@@ -29,6 +29,9 @@ def find_candidate_matches(text: str, rule: RuleDefinition) -> List[Change]:
     """
     Finds all valid non-overlapping matches for a rule within a given text string.
     Returns list of Change objects with exact character coordinates.
+    Context-aware:
+    - Adjusts sentence-start capitalization and introductory transition commas.
+    - Prevents word duplications and punctuation collisions.
     """
     changes: List[Change] = []
     pattern = rule.pattern
@@ -51,12 +54,41 @@ def find_candidate_matches(text: str, rule: RuleDefinition) -> List[Change]:
 
         for m in re.finditer(regex_str, text, flags=flags):
             orig = m.group(0)
-            rep = preserve_case_pattern(orig, replacement) if rule.preserve_case else replacement
+            start_idx = m.start()
+            end_idx = m.end()
+
+            # Context check: is this match at sentence start?
+            preceding = text[:start_idx].rstrip()
+            at_sentence_start = (len(preceding) == 0 or preceding[-1] in ".!?\n")
+
+            if rule.preserve_case:
+                rep = preserve_case_pattern(orig, replacement)
+                if at_sentence_start and rep and rep[0].islower():
+                    rep = rep[0].upper() + rep[1:]
+                elif not at_sentence_start and orig[0].islower() and rep and rep[0].isupper():
+                    rep = rep[0].lower() + rep[1:]
+            else:
+                rep = replacement
+
+            # Context check: introductory adverbial transitions like "Importantly"
+            # If the replacement is an introductory discourse adverb and next char is a space+word (no comma),
+            # ensure comma is included: "Importantly, this" rather than "Importantly this".
+            INTRO_ADVERBS = {"importantly", "furthermore", "moreover", "however", "therefore", "consequently", "thus"}
+            if rep.lower() in INTRO_ADVERBS:
+                following = text[end_idx:]
+                if following.startswith(" ") and not following.lstrip().startswith((",", ";", ":", ".")):
+                    rep = rep + ","
+
+            # Duplication check: if next word in text equals replacement word, avoid duplicate (e.g. "To to")
+            following_words = text[end_idx:].lstrip().split()
+            if following_words and rep.strip().lower() == following_words[0].lower():
+                continue
+
             changes.append(
                 Change(
                     rule_id=rule.id,
-                    start=m.start(),
-                    end=m.end(),
+                    start=start_idx,
+                    end=end_idx,
                     before=orig,
                     after=rep,
                     category=rule.category,
@@ -104,6 +136,7 @@ def apply_changes_to_text(text: str, changes: Sequence[Change]) -> str:
     """
     Applies approved changes to text in reverse offset order (from end to beginning).
     This strictly prevents offset drift without mutating the original buffer.
+    Performs context-aware punctuation and whitespace hygiene.
     """
     # Sort changes by start offset descending
     sorted_changes = sorted(changes, key=lambda c: c.start, reverse=True)
@@ -114,8 +147,13 @@ def apply_changes_to_text(text: str, changes: Sequence[Change]) -> str:
         # Verify text at slice matches before text
         if result[s:e] == c.before:
             result = result[:s] + c.after + result[e:]
-        else:
-            # Fallback if minor offset discrepancy
-            pass
+
+    # Post-transformation hygiene (strictly preserving placeholders and newlines)
+    # 1. Clean space before punctuation: "word , " -> "word, "
+    result = re.sub(r"[ \t]+([,.;:!?])", r"\1", result)
+    # 2. Clean double punctuation created by adjacent replacements: ", ," -> ", "
+    result = re.sub(r",\s*,", ", ", result)
+    # 3. Clean multiple spaces within lines: "word  word" -> "word word"
+    result = re.sub(r"(?<=\S)[ \t]{2,}(?=\S)", " ", result)
 
     return result

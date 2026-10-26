@@ -38,6 +38,17 @@ COMMON_ABBREVIATIONS = {
     "oct.",
     "nov.",
     "dec.",
+    "ph.d.",
+    "m.s.",
+    "b.s.",
+    "inc.",
+    "ltd.",
+    "corp.",
+    "eq.",
+    "eqs.",
+    "sec.",
+    "secs.",
+    "st.",
 }
 
 
@@ -187,3 +198,15 @@ class TextSegmenter:
             pos = match_end
 
         return sentences
+
+    def segment_document(self, text: str) -> List[Tuple[TextSegment, List[TextSegment]]]:
+        """
+        Segments a full document into structured paragraphs and their constituent sentences.
+        Maintains absolute source offsets across the document.
+        """
+        paragraphs = self.split_paragraphs(text)
+        result = []
+        for p in paragraphs:
+            sents = self.split_sentences(p.text, offset_base=p.start)
+            result.append((p, sents))
+        return result

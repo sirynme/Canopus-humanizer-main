@@ -24,6 +24,36 @@ NEGATION_WORDS = {
     "scarcely",
     "barely",
     "without",
+    "isnt",
+    "isn't",
+    "arent",
+    "aren't",
+    "wasnt",
+    "wasn't",
+    "werent",
+    "weren't",
+    "havent",
+    "haven't",
+    "hasnt",
+    "hasn't",
+    "hadnt",
+    "hadn't",
+    "wont",
+    "won't",
+    "wouldnt",
+    "wouldn't",
+    "cant",
+    "can't",
+    "couldnt",
+    "couldn't",
+    "shouldnt",
+    "shouldn't",
+    "doesnt",
+    "doesn't",
+    "dont",
+    "don't",
+    "didnt",
+    "didn't",
 }
 
 CERTAINTY_MODALS = {
@@ -45,6 +75,44 @@ UNCERTAINTY_MODALS = {
     "plausible",
     "approximately",
     "roughly",
+}
+
+POSITIVE_DIRECTION_WORDS = {
+    "increase",
+    "increases",
+    "increased",
+    "increasing",
+    "higher",
+    "highest",
+    "greater",
+    "outperform",
+    "outperforms",
+    "outperformed",
+    "superior",
+    "enhance",
+    "enhances",
+    "enhanced",
+    "positive",
+    "gain",
+    "growth",
+}
+
+NEGATIVE_DIRECTION_WORDS = {
+    "decrease",
+    "decreases",
+    "decreased",
+    "decreasing",
+    "lower",
+    "lowest",
+    "less",
+    "underperform",
+    "inferior",
+    "degrade",
+    "degrades",
+    "degraded",
+    "negative",
+    "loss",
+    "reduction",
 }
 
 
@@ -173,5 +241,36 @@ class OutputValidator:
                         message=f"IEEE citation count mismatch: {orig_ieee} in original, {trans_ieee} in transformed.",
                     )
                 )
+
+        # 7. Directional and Causal Polarity Check
+        orig_words = set(re.findall(r"\b[a-zA-Z]+\b", original_text.lower()))
+        trans_words = set(re.findall(r"\b[a-zA-Z]+\b", transformed_text.lower()))
+        
+        orig_pos = orig_words & POSITIVE_DIRECTION_WORDS
+        orig_neg = orig_words & NEGATIVE_DIRECTION_WORDS
+        trans_pos = trans_words & POSITIVE_DIRECTION_WORDS
+        trans_neg = trans_words & NEGATIVE_DIRECTION_WORDS
+
+        # Check if positive direction flipped to negative or vice versa
+        if (orig_pos and trans_neg and not trans_pos) or (orig_neg and trans_pos and not trans_neg):
+            issues.append(
+                ValidationIssue(
+                    code="CLAIM_POLARITY_INVERTED",
+                    severity="error",
+                    message="Directional claim polarity appears inverted between positive and negative findings.",
+                )
+            )
+
+        # 8. Structural and Residual Artifact Check
+        orig_prot_tokens = original_text.count("<<CANOPUS_PROT_")
+        trans_prot_tokens = transformed_text.count("<<CANOPUS_PROT_")
+        if trans_prot_tokens > orig_prot_tokens or ("\x00" in transformed_text and "\x00" not in original_text):
+            issues.append(
+                ValidationIssue(
+                    code="CORRUPTED_TEXT_ARTIFACT",
+                    severity="error",
+                    message="Residual placeholder or null byte artifact detected in transformed output.",
+                )
+            )
 
         return issues
