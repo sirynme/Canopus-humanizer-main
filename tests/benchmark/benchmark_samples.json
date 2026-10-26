@@ -1,16 +1,35 @@
 {
-  "version": "4.0.0",
+  "version": "4.2.0",
   "samples": [
     {
       "id": "academic_literature_review_01",
       "category": "academic",
       "mode": "conservative",
-      "ruleset_ids": ["base", "academic", "grammar"],
+      "ruleset_ids": [
+        "base",
+        "academic",
+        "grammar"
+      ],
       "source_text": "In order to evaluate the efficacy of the proposed transformer models, we conducted an empirical analysis on the benchmark dataset. Previous studies have shown that learning rate scheduling plays a crucial role in gradient descent convergence. Furthermore, it has been reported that the model achieves 94.2% accuracy (Smith et al., 2023).",
       "expected_invariants": {
-        "must_preserve": ["transformer models", "learning rate", "gradient descent", "94.2%", "(Smith et al., 2023)"],
-        "must_not_contain": ["is essential to in", "is requisite to in", "the construct achieves"],
-        "must_transform": ["To evaluate", "Prior investigations have shown", "is central to", "existing literature indicates that"],
+        "must_preserve": [
+          "transformer models",
+          "learning rate",
+          "gradient descent",
+          "94.2%",
+          "(Smith et al., 2023)"
+        ],
+        "must_not_contain": [
+          "is essential to in",
+          "is requisite to in",
+          "the construct achieves"
+        ],
+        "must_transform": [
+          "To evaluate",
+          "Prior investigations have shown",
+          "is central to",
+          "existing literature indicates that"
+        ],
         "max_unnecessary_changes": 5
       },
       "evaluation_criteria": "Removes inflated academic openers and replaces formulaic literature review phrases with scholarly equivalents while preserving citations, percentages, and model architecture terms."
@@ -19,12 +38,35 @@
       "id": "technical_algorithms_02",
       "category": "technical",
       "mode": "conservative",
-      "ruleset_ids": ["base", "academic", "technical", "grammar"],
+      "ruleset_ids": [
+        "base",
+        "academic",
+        "technical",
+        "grammar"
+      ],
       "source_text": "We analyzed the results using stochastic gradient descent with a learning rate of $10^{-4}$. As mentioned earlier, the convolutional kernel size was set to $3 \\times 3$, which is consistent with prior work [1, 2]. Due to the fact that memory is constrained, we must utilize GPU caching.",
       "expected_invariants": {
-        "must_preserve": ["stochastic gradient descent", "learning rate", "$10^{-4}$", "convolutional kernel", "$3 \\times 3$", "[1, 2]", "GPU"],
-        "must_not_contain": ["quandary", "stratagem", "veridical", "scrutinized"],
-        "must_transform": ["As noted above", "aligns with", "Because", "use"],
+        "must_preserve": [
+          "stochastic gradient descent",
+          "learning rate",
+          "$10^{-4}$",
+          "convolutional kernel",
+          "$3 \\times 3$",
+          "[1, 2]",
+          "GPU"
+        ],
+        "must_not_contain": [
+          "quandary",
+          "stratagem",
+          "veridical",
+          "scrutinized"
+        ],
+        "must_transform": [
+          "As noted above",
+          "aligns with",
+          "Because",
+          "use"
+        ],
         "max_unnecessary_changes": 4
       },
       "evaluation_criteria": "Preserves LaTeX math, citations, hardware terms, and optimization algorithms without injecting pseudo-intellectual synonyms."
@@ -33,12 +75,31 @@
       "id": "general_essay_argument_03",
       "category": "general_essay",
       "mode": "conservative",
-      "ruleset_ids": ["base", "academic", "grammar"],
+      "ruleset_ids": [
+        "base",
+        "academic",
+        "grammar"
+      ],
       "source_text": "Due to the fact that modern technology is advancing rapidly, a large number of individuals delve into digital communication. It is worth noting that this trend stands as a testament to human innovation. In conclusion, we must consider the ethical implications.",
       "expected_invariants": {
-        "must_preserve": ["ethical implications", "human innovation", "digital communication"],
-        "must_not_contain": ["Importantly this trend", "due to the fact that", "delve into"],
-        "must_transform": ["Because", "numerous", "examine closely", "Importantly,", "demonstrates the efficacy of", "In summary,"],
+        "must_preserve": [
+          "ethical implications",
+          "human innovation",
+          "digital communication"
+        ],
+        "must_not_contain": [
+          "Importantly this trend",
+          "due to the fact that",
+          "delve into"
+        ],
+        "must_transform": [
+          "Because",
+          "numerous",
+          "examine closely",
+          "Importantly,",
+          "demonstrates the efficacy of",
+          "In summary,"
+        ],
         "max_unnecessary_changes": 6
       },
       "evaluation_criteria": "Prunes wordy cliches ('due to the fact that', 'a large number of', 'stands as a testament to') and ensures proper punctuation after introductory adverbs ('Importantly,')."
@@ -47,14 +108,23 @@
       "id": "clear_well_written_passage_04",
       "category": "clear_well_written",
       "mode": "conservative",
-      "ruleset_ids": ["base", "academic", "technical", "grammar"],
+      "ruleset_ids": [
+        "base",
+        "academic",
+        "technical",
+        "grammar"
+      ],
       "source_text": "We present a linear-time algorithm for cycle detection in directed graphs. The method operates directly on adjacency lists without auxiliary storage.",
       "expected_invariants": {
         "must_preserve": [
           "We present a linear-time algorithm for cycle detection in directed graphs.",
           "The method operates directly on adjacency lists without auxiliary storage."
         ],
-        "must_not_contain": ["methodology operates", "stratagem", "interrogate"],
+        "must_not_contain": [
+          "methodology operates",
+          "stratagem",
+          "interrogate"
+        ],
         "must_transform": [],
         "max_unnecessary_changes": 0
       },
@@ -64,12 +134,29 @@
       "id": "grammar_and_awkward_corrections_05",
       "category": "grammar_awkward",
       "mode": "conservative",
-      "ruleset_ids": ["base", "academic", "grammar"],
+      "ruleset_ids": [
+        "base",
+        "academic",
+        "grammar"
+      ],
       "source_text": "Irregardless of prior assumptions, the team could of verified the hypothesis earlier. The criteria is satisfied because the system comprise of three decoupled modules.",
       "expected_invariants": {
-        "must_preserve": ["decoupled modules", "three"],
-        "must_not_contain": ["Irregardless", "could of", "criteria is", "comprise of"],
-        "must_transform": ["Regardless", "could have", "criteria are", "comprise"],
+        "must_preserve": [
+          "decoupled modules",
+          "three"
+        ],
+        "must_not_contain": [
+          "Irregardless",
+          "could of",
+          "criteria is",
+          "comprise of"
+        ],
+        "must_transform": [
+          "Regardless",
+          "could have",
+          "criteria are",
+          "comprise"
+        ],
         "max_unnecessary_changes": 4
       },
       "evaluation_criteria": "Detects and corrects standard grammatical and agreement errors ('irregardless', 'could of', 'criteria is', 'comprise of') without changing meaning."
@@ -78,12 +165,36 @@
       "id": "multi_paragraph_long_document_06",
       "category": "multi_paragraph_long",
       "mode": "conservative",
-      "ruleset_ids": ["base", "academic", "technical", "grammar"],
+      "ruleset_ids": [
+        "base",
+        "academic",
+        "technical",
+        "grammar"
+      ],
       "source_text": "In order to examine the distributed database architecture, we conducted an empirical evaluation across 50 cluster nodes. Previous studies have shown that network partitions cause latency spikes up to 450 ms [1].\n\nDue to the fact that consensus rounds require multi-head attention, we delve into the coordination protocol. It is worth noting that 99.4% of queries completed within tolerance bounds (Wang & Zhao, 2024).\n\nIn conclusion, subsequent investigation is warranted to optimize cross-entropy loss under high contention.",
       "expected_invariants": {
-        "must_preserve": ["50", "450 ms", "[1]", "99.4%", "(Wang & Zhao, 2024)", "multi-head attention", "cross-entropy"],
-        "must_not_contain": ["In order to", "Due to the fact that", "delve into", "In conclusion"],
-        "must_transform": ["To examine", "Because consensus", "examine closely", "Importantly,", "In summary,"],
+        "must_preserve": [
+          "50",
+          "450 ms",
+          "[1]",
+          "99.4%",
+          "(Wang & Zhao, 2024)",
+          "multi-head attention",
+          "cross-entropy"
+        ],
+        "must_not_contain": [
+          "In order to",
+          "Due to the fact that",
+          "delve into",
+          "In conclusion"
+        ],
+        "must_transform": [
+          "To examine",
+          "Because consensus",
+          "examine closely",
+          "Importantly,",
+          "In summary,"
+        ],
         "max_unnecessary_changes": 8
       },
       "evaluation_criteria": "Maintains paragraph boundaries, citation count, numbers, physical units, and model terminology across multi-paragraph documents."
@@ -92,7 +203,12 @@
       "id": "citations_equations_terminology_heavy_07",
       "category": "citations_math_numbers",
       "mode": "conservative",
-      "ruleset_ids": ["base", "academic", "technical", "grammar"],
+      "ruleset_ids": [
+        "base",
+        "academic",
+        "technical",
+        "grammar"
+      ],
       "source_text": "According to existing benchmarks, ResNet-50 achieved $p < 0.001$ with a learning rate of $10^{-3}$ and 14.8% error rate on ImageNet-1K. The loss function $L(\\theta) = -\\sum y \\log(\\hat{y})$ was evaluated using backpropagation without any numerical instability [2, 3].",
       "expected_invariants": {
         "must_preserve": [
@@ -107,11 +223,104 @@
           "without",
           "[2, 3]"
         ],
-        "must_not_contain": ["CORRUPTED", "PROT_"],
+        "must_not_contain": [
+          "CORRUPTED",
+          "PROT_"
+        ],
         "must_transform": [],
         "max_unnecessary_changes": 1
       },
       "evaluation_criteria": "Strictly protects all equations, scientific notations, percentages, hardware models, technical glossary terms, negations ('without'), and citations."
+    },
+    {
+      "id": "biomedical_clinical_prose_08",
+      "category": "academic",
+      "mode": "conservative",
+      "ruleset_ids": [
+        "base",
+        "academic",
+        "grammar"
+      ],
+      "source_text": "In spite of the fact that the sample size was limited to N = 1,240 patients, we conducted an empirical analysis on therapeutic efficacy. The sum total of adverse events was 14 (p < 0.005). Furthermore, it has been reported that the drug maintains 98.2% stability.",
+      "expected_invariants": {
+        "must_preserve": [
+          "N = 1,240",
+          "patients",
+          "therapeutic efficacy",
+          "14",
+          "(p < 0.005)",
+          "98.2%"
+        ],
+        "must_not_contain": [
+          "In spite of the fact that",
+          "sum total",
+          "it has been reported that"
+        ],
+        "must_transform": [
+          "Although",
+          "total",
+          "existing literature indicates that"
+        ],
+        "max_unnecessary_changes": 4
+      },
+      "evaluation_criteria": "Clinical study with sample sizes, p-values, percentages, and redundancy pruning ('sum total' -> 'total', 'in spite of the fact that' -> 'although')."
+    },
+    {
+      "id": "clear_technical_abstract_09",
+      "category": "clear_well_written",
+      "mode": "conservative",
+      "ruleset_ids": [
+        "base",
+        "academic",
+        "technical",
+        "grammar"
+      ],
+      "source_text": "We present Raft, a consensus algorithm designed for understandability. It achieves equivalent fault tolerance to Paxos without complex state transitions.",
+      "expected_invariants": {
+        "must_preserve": [
+          "We present Raft, a consensus algorithm designed for understandability.",
+          "It achieves equivalent fault tolerance to Paxos without complex state transitions."
+        ],
+        "must_not_contain": [
+          "methodology",
+          "stratagem",
+          "interrogate"
+        ],
+        "must_transform": [],
+        "max_unnecessary_changes": 0
+      },
+      "evaluation_criteria": "Crisp, concise systems abstract that must be left completely unaltered with zero unnecessary churn."
+    },
+    {
+      "id": "complex_negation_and_modals_10",
+      "category": "technical",
+      "mode": "conservative",
+      "ruleset_ids": [
+        "base",
+        "academic",
+        "technical",
+        "grammar"
+      ],
+      "source_text": "The memory controller must not exceed 85\u00b0C. Under no circumstances should the core fail without logging. In order to prevent data races, we utilize mutex locks.",
+      "expected_invariants": {
+        "must_preserve": [
+          "must not exceed",
+          "85\u00b0C",
+          "Under no circumstances",
+          "without logging",
+          "mutex locks"
+        ],
+        "must_not_contain": [
+          "In order to",
+          "utilize mutex"
+        ],
+        "must_transform": [
+          "To prevent",
+          "use mutex locks"
+        ],
+        "max_unnecessary_changes": 3
+      },
+      "evaluation_criteria": "Hardware safety specification with modal certainty ('must not'), strict negations ('Under no circumstances', 'without'), temperature units, and term simplification ('utilize' -> 'use')."
     }
   ]
 }

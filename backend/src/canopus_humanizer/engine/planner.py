@@ -1,6 +1,6 @@
 """Deterministic change planning, conflict resolution, and change-budget enforcement."""
 
-from typing import List, Sequence, Set, Tuple
+from typing import Any, List, Optional, Sequence, Set, Tuple
 
 from canopus_humanizer.engine.errors import RULE_CONFLICT
 from canopus_humanizer.engine.models import Change, ProtectedSpan, ValidationIssue

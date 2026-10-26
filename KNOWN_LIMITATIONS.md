@@ -1,6 +1,6 @@
 # Canopus Humanizer — Known Limitations & Technical Boundaries
 
-**Document Version:** 1.0.0  
+**Document Version:** 4.2.0  
 **Date:** 26 October 2026  
 
 ---
@@ -9,11 +9,15 @@
 
 - **Rule-Based Heuristics Do Not Guarantee Universal Semantic Equivalence**:  
   While the engine enforces strict negation, modal qualification, and numeric preservation gates, rule-driven phrase replacements can produce subtle tone or register shifts depending on context. For high-stakes legal, medical, or doctoral submissions, human review of the generated diff remains essential.
+- **Evaluation Corpus Scope**:  
+  Reported benchmark preservation (100.0%) and error resolution (100.0%) reflect performance on the documented 10-sample evaluation corpus (`tests/benchmark/benchmark_samples.json`) and invariant test suites. These results demonstrate engine correctness on tested patterns but do not constitute an unconstrained universal guarantee for arbitrary, unreviewed prose.
 
 ## 2. Protected Span Incompleteness Risk
 
 - **Domain-Specific or Unregistered Jargon**:  
   The engine includes an extensive dictionary of scientific, mathematical, and multi-word technical units (MWUs). However, novel terminology, internal project acronyms, or non-standard notation not covered by standard parsers may not be automatically protected unless supplied via `custom_protected_terms`.
+- **Syntax and Delimiter Sensitivity**:  
+  Non-standard LaTeX math notation (e.g., custom delimiter macros without standard `$...$` or `\[...\]`) or malformed citation brackets may bypass protected span masking. Authors should ensure valid LaTeX or standard citation syntax.
 
 ## 3. Format Adapter Boundaries
 
@@ -35,12 +39,14 @@
 
 - **Compression Ratio, Entropy, and Readability Are Not Proof of Authorship**:  
   Descriptive measurements (zlib compression ratio, character Shannon entropy, Flesch Reading Ease, burstiness variance) quantify surface information density. They must never be interpreted as definitive proof of AI generation, human authorship, or academic misconduct.
-- **No Detector Evasion Guarantee**:  
-  Canopus Humanizer is an academic editing and stylistic refinement engine. It does not guarantee, promise, or promote evasion of commercial plagiarism or AI-writing detectors.
+- **Strict Prohibition of Detector Evasion Claims**:  
+  Canopus Humanizer is an academic editing and stylistic refinement engine. It does not optimize transformations to manipulate commercial plagiarism or AI-writing detector scores, nor does it guarantee or claim that outputs are "undetectable." Detector scores are unstable, non-reproducible, and irrelevant to writing quality.
 
 ## 6. Operational & Environmental Boundaries
 
 - **Memory Limits on Extreme Inputs**:  
   Default resource limits cap uploads at 5MB raw text and 25MB decompressed archives. Larger enterprise document batches require streaming or batch chunking.
+- **Type-Hint Reflection Compatibility**:  
+  Runtime reflection via `typing.get_type_hints` requires explicit typing imports across all public classes. This was confirmed and verified in `engine/planner.py` during V4.2 audit.
 - **Infrastructure Security**:  
   While the core engine performs all transformations in memory and never retains uploaded files, overall privacy depends on the host operating system, TLS termination, and reverse-proxy logging configuration in production deployments.

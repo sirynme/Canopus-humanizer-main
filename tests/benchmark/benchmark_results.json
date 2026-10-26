@@ -1,7 +1,7 @@
 {
-  "benchmark_version": "4.0.0",
-  "timestamp": 1793036840.9593856,
-  "total_samples": 7,
+  "benchmark_version": "4.2.0",
+  "timestamp": 1793039646.517635,
+  "total_samples": 10,
   "results": [
     {
       "id": "academic_literature_review_01",
@@ -13,11 +13,11 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 15.32,
+      "v4_latency_ms": 20.2,
       "legacy_changes_count": 5,
       "legacy_preservation_rate": 1.0,
       "legacy_banned_terms_detected": [],
-      "legacy_latency_ms": 7.32,
+      "legacy_latency_ms": 8.15,
       "readability": {
         "original_flesch": 41.19166666666669,
         "legacy_flesch": 21.73333333333335,
@@ -34,11 +34,11 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 7.32,
+      "v4_latency_ms": 4.36,
       "legacy_changes_count": 9,
       "legacy_preservation_rate": 1.0,
       "legacy_banned_terms_detected": [],
-      "legacy_latency_ms": 1.64,
+      "legacy_latency_ms": 1.97,
       "readability": {
         "original_flesch": 64.21993197278914,
         "legacy_flesch": 63.12560606060609,
@@ -55,13 +55,13 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 4.49,
+      "v4_latency_ms": 3.0,
       "legacy_changes_count": 15,
       "legacy_preservation_rate": 1.0,
       "legacy_banned_terms_detected": [
         "Importantly this trend"
       ],
-      "legacy_latency_ms": 4.65,
+      "legacy_latency_ms": 2.71,
       "readability": {
         "original_flesch": 36.14382113821139,
         "legacy_flesch": -18.852528735632177,
@@ -78,11 +78,11 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 4.43,
+      "v4_latency_ms": 1.94,
       "legacy_changes_count": 16,
       "legacy_preservation_rate": 0.5,
       "legacy_banned_terms_detected": [],
-      "legacy_latency_ms": 1.68,
+      "legacy_latency_ms": 1.02,
       "readability": {
         "original_flesch": 26.97750000000002,
         "legacy_flesch": 22.94892857142861,
@@ -99,7 +99,7 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 4.17,
+      "v4_latency_ms": 2.37,
       "legacy_changes_count": 17,
       "legacy_preservation_rate": 1.0,
       "legacy_banned_terms_detected": [
@@ -108,7 +108,7 @@
         "criteria is",
         "comprise of"
       ],
-      "legacy_latency_ms": 2.64,
+      "legacy_latency_ms": 1.17,
       "readability": {
         "original_flesch": 39.55500000000001,
         "legacy_flesch": 32.504999999999995,
@@ -125,11 +125,11 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 6.13,
+      "v4_latency_ms": 4.87,
       "legacy_changes_count": 23,
       "legacy_preservation_rate": 1.0,
       "legacy_banned_terms_detected": [],
-      "legacy_latency_ms": 3.46,
+      "legacy_latency_ms": 3.07,
       "readability": {
         "original_flesch": 37.385818181818195,
         "legacy_flesch": 21.50862686567166,
@@ -146,15 +146,83 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 3.53,
+      "v4_latency_ms": 3.73,
       "legacy_changes_count": 24,
       "legacy_preservation_rate": 1.0,
       "legacy_banned_terms_detected": [],
-      "legacy_latency_ms": 1.05,
+      "legacy_latency_ms": 1.07,
       "readability": {
         "original_flesch": 43.35668604651164,
         "legacy_flesch": 47.2915697674419,
         "v4_flesch": 43.35668604651164
+      }
+    },
+    {
+      "id": "biomedical_clinical_prose_08",
+      "category": "academic",
+      "original_char_count": 263,
+      "v4_accepted": true,
+      "v4_changes_count": 3,
+      "v4_preservation_rate": 1.0,
+      "v4_transformation_rate": 1.0,
+      "v4_banned_terms_detected": [],
+      "v4_unnecessary_edits": 0,
+      "v4_latency_ms": 4.27,
+      "legacy_changes_count": 25,
+      "legacy_preservation_rate": 1.0,
+      "legacy_banned_terms_detected": [
+        "In spite of the fact that",
+        "sum total"
+      ],
+      "legacy_latency_ms": 1.96,
+      "readability": {
+        "original_flesch": 61.33333333333334,
+        "legacy_flesch": 49.65862318840581,
+        "v4_flesch": 41.021666666666675
+      }
+    },
+    {
+      "id": "clear_technical_abstract_09",
+      "category": "clear_well_written",
+      "original_char_count": 153,
+      "v4_accepted": true,
+      "v4_changes_count": 0,
+      "v4_preservation_rate": 1.0,
+      "v4_transformation_rate": 1.0,
+      "v4_banned_terms_detected": [],
+      "v4_unnecessary_edits": 0,
+      "v4_latency_ms": 2.75,
+      "legacy_changes_count": 26,
+      "legacy_preservation_rate": 0.5,
+      "legacy_banned_terms_detected": [],
+      "legacy_latency_ms": 1.62,
+      "readability": {
+        "original_flesch": 14.795000000000016,
+        "legacy_flesch": 6.335000000000008,
+        "v4_flesch": 14.795000000000016
+      }
+    },
+    {
+      "id": "complex_negation_and_modals_10",
+      "category": "technical",
+      "original_char_count": 160,
+      "v4_accepted": true,
+      "v4_changes_count": 2,
+      "v4_preservation_rate": 1.0,
+      "v4_transformation_rate": 1.0,
+      "v4_banned_terms_detected": [],
+      "v4_unnecessary_edits": 0,
+      "v4_latency_ms": 3.63,
+      "legacy_changes_count": 28,
+      "legacy_preservation_rate": 1.0,
+      "legacy_banned_terms_detected": [
+        "utilize mutex"
+      ],
+      "legacy_latency_ms": 1.64,
+      "readability": {
+        "original_flesch": 62.9666666666667,
+        "legacy_flesch": 56.24866666666668,
+        "v4_flesch": 69.78466666666668
       }
     }
   ]

@@ -167,3 +167,16 @@ def test_regression_rules_loading_failure_produces_warning(tmp_path):
         else:
             os.environ.pop("CANOPUS_RULES_DIR", None)
 
+
+
+def test_regression_planner_typing_imports():
+    """
+    Regression Test: backend/src/canopus_humanizer/engine/planner.py previously omitted
+    Any and Optional from typing imports, which raises NameError: name 'Optional' is not defined
+    when typing.get_type_hints(ChangePlanner.plan) is evaluated at runtime or reflection.
+    """
+    from typing import get_type_hints
+    from canopus_humanizer.engine.planner import ChangePlanner
+    hints = get_type_hints(ChangePlanner.plan)
+    assert "opportunities" in hints
+    assert "return" in hints
