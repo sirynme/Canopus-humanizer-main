@@ -12,33 +12,41 @@ if str(src_dir) not in sys.path:
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from canopus_humanizer.api.errors import register_exception_handlers
 from canopus_humanizer.api.routes import router as api_router
 from canopus_humanizer.config import GLOBAL_CONFIG
 
-app = FastAPI(
-    title="canopus-humanizer API",
-    description="Text humanization API",
-    version=GLOBAL_CONFIG.VERSION,
-    docs_url="/docs",
-    redoc_url="/redoc",
-)
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+def create_app() -> FastAPI:
+    application = FastAPI(
+        title="canopus-humanizer API",
+        description="Text humanization API",
+        version=GLOBAL_CONFIG.VERSION,
+        docs_url="/docs",
+        redoc_url="/redoc",
+    )
 
-app.include_router(api_router)
+    application.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    application.include_router(api_router)
+    register_exception_handlers(application)
+
+    # Serve frontend UI directly from docs/
+    docs_dir = backend_dir.parent / "docs"
+    if docs_dir.exists():
+        from fastapi.staticfiles import StaticFiles
+        application.mount("/", StaticFiles(directory=str(docs_dir), html=True), name="frontend")
+
+    return application
 
 
-# Serve frontend UI directly from docs/
-docs_dir = backend_dir.parent / "docs"
-if docs_dir.exists():
-    from fastapi.staticfiles import StaticFiles
-    app.mount("/", StaticFiles(directory=str(docs_dir), html=True), name="frontend")
+app = create_app()
 
 
 if __name__ == "__main__":

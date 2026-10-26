@@ -102,3 +102,12 @@ class CitationFormatResponse(BaseModel):
     bibtex: str
     status: str
     validation_notes: List[str]
+
+
+class ErrorResponse(BaseModel):
+    """Standardized error envelope for API domain exceptions."""
+    error: str = Field(..., description="Exception class name (e.g. InputError, RulesetError)")
+    code: str = Field(..., description="Machine-readable standardized error code")
+    message: str = Field(..., description="Safe human-readable error description")
+    detail: str = Field(..., description="Standard detail field for client compatibility")
+    details: Dict[str, Any] = Field(default_factory=dict, description="Additional structured error metadata")

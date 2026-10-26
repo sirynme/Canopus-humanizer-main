@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "canopus-humanizer"
-version = "1.0.0"
+version = "4.2.0"
 description = "Deterministic, reviewable rule-based text humanization engine"
 readme = "README.md"
 requires-python = ">=3.10"

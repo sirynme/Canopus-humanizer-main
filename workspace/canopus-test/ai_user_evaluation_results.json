@@ -1,0 +1,309 @@
+{
+  "version": "1.0",
+  "source": "/home/canopus/Downloads/Canopus-humanizer-main/workspace/canopus-test/ai_user_samples.json",
+  "engine": "Canopus V4 /v1/transform",
+  "detectors": "external detector checks are recorded separately",
+  "results": [
+    {
+      "id": "short_general_65w",
+      "level": "short",
+      "domain": "general",
+      "input_words": 65,
+      "input_characters": 470,
+      "accepted": true,
+      "change_count": 0,
+      "changes": [],
+      "issues": [],
+      "original_text": "In today's rapidly evolving world, technology plays a crucial role in shaping how people communicate, work, and learn. It is important to recognize that digital tools offer numerous benefits, but they also create significant challenges. By embracing innovation in a thoughtful manner, communities can improve productivity and strengthen collaboration. Ultimately, a balanced approach is essential because progress should serve people rather than replace human judgement.",
+      "transformed_text": "In today's rapidly evolving world, technology plays a crucial role in shaping how people communicate, work, and learn. It is important to recognize that digital tools offer numerous benefits, but they also create significant challenges. By embracing innovation in a thoughtful manner, communities can improve productivity and strengthen collaboration. Ultimately, a balanced approach is essential because progress should serve people rather than replace human judgement.",
+      "metrics_before": {
+        "character_count": 470,
+        "word_count": 65,
+        "sentence_count": 4,
+        "paragraph_count": 1,
+        "avg_sentence_length": 16.5,
+        "sentence_length_std_dev": 2.08,
+        "type_token_ratio": 0.8923,
+        "flesch_reading_ease": 22.44,
+        "flesch_kincaid_grade": 14.17,
+        "zlib_compression_ratio": 0.6404,
+        "shannon_entropy": 4.3155,
+        "disclaimer": "Notice: Text statistics, compression ratio, Shannon entropy, and readability scores measure surface information density and token distribution. They do not reliably establish authorship, intent, or AI-generated status."
+      },
+      "metrics_after": {
+        "character_count": 470,
+        "word_count": 65,
+        "sentence_count": 4,
+        "paragraph_count": 1,
+        "avg_sentence_length": 16.5,
+        "sentence_length_std_dev": 2.08,
+        "type_token_ratio": 0.8923,
+        "flesch_reading_ease": 22.44,
+        "flesch_kincaid_grade": 14.17,
+        "zlib_compression_ratio": 0.6404,
+        "shannon_entropy": 4.3155,
+        "disclaimer": "Notice: Text statistics, compression ratio, Shannon entropy, and readability scores measure surface information density and token distribution. They do not reliably establish authorship, intent, or AI-generated status.",
+        "protected_spans_count": 0,
+        "latency_ms": 14.75,
+        "classification": {
+          "content_type": "general_essay",
+          "confidence": 0.75,
+          "is_already_clear": false,
+          "editing_needs": [
+            "awkward_phrasing",
+            "transitions"
+          ]
+        }
+      },
+      "legacy_endpoint": {
+        "status_code": 200,
+        "success": true,
+        "modifications_count": 5,
+        "output": "In today's rapidly evolving world, technology is central to shaping how people communicate, work, and learn. It is crucial to recognize that digital tools offer numerous benefits, but they also create substantial challenges. By embracing innovation in a thoughtful manner, communities can improve productivity and strengthen collaboration. In the final analysis, a balanced approach is vital because progress should serve people rather than replace human judgement."
+      },
+      "checks": {
+        "api_status_200": true,
+        "api_accepted": true,
+        "output_matches_api": true,
+        "offsets_reference_original": true,
+        "idempotent": true,
+        "meaning_safeguards_have_no_errors": true
+      },
+      "output_changed": false
+    },
+    {
+      "id": "medium_academic_152w",
+      "level": "medium",
+      "domain": "academic",
+      "input_words": 152,
+      "input_characters": 1098,
+      "accepted": true,
+      "change_count": 4,
+      "changes": [
+        {
+          "rule_id": "clarity.due_to_the_fact_that_001",
+          "start": 0,
+          "end": 20,
+          "before": "Due to the fact that",
+          "after": "Because",
+          "category": "clarity",
+          "requires_review": false
+        },
+        {
+          "rule_id": "academic.previous_studies_have_shown_002",
+          "start": 151,
+          "end": 178,
+          "before": "Previous studies have shown",
+          "after": "Prior investigations have shown",
+          "category": "clarity",
+          "requires_review": false
+        },
+        {
+          "rule_id": "clarity.in_order_to_002",
+          "start": 673,
+          "end": 684,
+          "before": "In order to",
+          "after": "To",
+          "category": "redundancy",
+          "requires_review": false
+        },
+        {
+          "rule_id": "clarity.it_is_worth_noting_that_009",
+          "start": 295,
+          "end": 318,
+          "before": "it is worth noting that",
+          "after": "importantly,",
+          "category": "redundancy",
+          "requires_review": false
+        }
+      ],
+      "issues": [],
+      "original_text": "Due to the fact that online learning has expanded considerably, researchers have conducted numerous studies to evaluate its educational effectiveness. Previous studies have shown that structured digital courses can improve access for students who face geographic or financial barriers. However, it is worth noting that access alone does not guarantee meaningful learning. In a survey of 1,240 university students, 68.4% reported that recorded lectures were useful, while only 41.2% preferred them to interactive seminars (Rahman et al., 2021). The findings suggest that technology is most valuable when it supports deliberate instructional design rather than replacing it. In order to interpret these results responsibly, future investigations should examine differences in discipline, prior preparation, and internet reliability. It is also important to acknowledge that the study did not measure long-term retention. Consequently, the evidence supports a cautious conclusion: digital delivery can broaden participation, but its educational impact depends on how learning activities are organised.",
+      "transformed_text": "Because online learning has expanded considerably, researchers have conducted numerous studies to evaluate its educational effectiveness. Prior investigations have shown that structured digital courses can improve access for students who face geographic or financial barriers. However, importantly, access alone does not guarantee meaningful learning. In a survey of 1,240 university students, 68.4% reported that recorded lectures were useful, while only 41.2% preferred them to interactive seminars (Rahman et al., 2021). The findings suggest that technology is most valuable when it supports deliberate instructional design rather than replacing it. To interpret these results responsibly, future investigations should examine differences in discipline, prior preparation, and internet reliability. It is also important to acknowledge that the study did not measure long-term retention. Consequently, the evidence supports a cautious conclusion: digital delivery can broaden participation, but its educational impact depends on how learning activities are organised.",
+      "metrics_before": {
+        "character_count": 1098,
+        "word_count": 155,
+        "sentence_count": 8,
+        "paragraph_count": 1,
+        "avg_sentence_length": 19.5,
+        "sentence_length_std_dev": 4.9,
+        "type_token_ratio": 0.7935,
+        "flesch_reading_ease": 19.61,
+        "flesch_kincaid_grade": 15.34,
+        "zlib_compression_ratio": 0.5683,
+        "shannon_entropy": 4.3292,
+        "disclaimer": "Notice: Text statistics, compression ratio, Shannon entropy, and readability scores measure surface information density and token distribution. They do not reliably establish authorship, intent, or AI-generated status."
+      },
+      "metrics_after": {
+        "character_count": 1069,
+        "word_count": 145,
+        "sentence_count": 8,
+        "paragraph_count": 1,
+        "avg_sentence_length": 18.25,
+        "sentence_length_std_dev": 5.87,
+        "type_token_ratio": 0.8207,
+        "flesch_reading_ease": 13.4,
+        "flesch_kincaid_grade": 15.89,
+        "zlib_compression_ratio": 0.5678,
+        "shannon_entropy": 4.3485,
+        "disclaimer": "Notice: Text statistics, compression ratio, Shannon entropy, and readability scores measure surface information density and token distribution. They do not reliably establish authorship, intent, or AI-generated status.",
+        "protected_spans_count": 5,
+        "latency_ms": 6.84,
+        "classification": {
+          "content_type": "academic",
+          "confidence": 0.76,
+          "is_already_clear": false,
+          "editing_needs": [
+            "redundancy"
+          ]
+        }
+      },
+      "legacy_endpoint": {
+        "status_code": 200,
+        "success": true,
+        "modifications_count": 9,
+        "output": "Because online learning has expanded considerably, researchers have conducted numerous studies to gauge its educational effectiveness. Prior investigations have shown that structured digital courses can improve access for students who face geographic or financial barriers. In contrast, importantly access alone does not guarantee meaningful learning. In a survey of 1,240 university students, 68.4% reported that recorded lectures were useful, while only 41.2% preferred them to interactive seminars (Rahman et al., 2021). The findings suggest that technology is most of the valuable when it supports deliberate instructional design rather than replacing it. To interpret these findings responsibly, future investigations should examine differences in discipline, prior preparation, and internet reliability. It is also key to acknowledge that the study did not measure long-term retention. Consequently, the evidence supports a cautious conclusion: digital delivery can broaden participation, but its educational impact depends on how learning activities are organised."
+      },
+      "checks": {
+        "api_status_200": true,
+        "api_accepted": true,
+        "output_matches_api": true,
+        "offsets_reference_original": true,
+        "idempotent": true,
+        "meaning_safeguards_have_no_errors": true
+      },
+      "output_changed": true
+    },
+    {
+      "id": "long_technical_367w",
+      "level": "long",
+      "domain": "technical",
+      "input_words": 367,
+      "input_characters": 2610,
+      "accepted": true,
+      "change_count": 7,
+      "changes": [
+        {
+          "rule_id": "clarity.due_to_the_fact_that_001",
+          "start": 264,
+          "end": 284,
+          "before": "Due to the fact that",
+          "after": "Because",
+          "category": "clarity",
+          "requires_review": false
+        },
+        {
+          "rule_id": "clarity.in_order_to_002",
+          "start": 0,
+          "end": 11,
+          "before": "In order to",
+          "after": "To",
+          "category": "redundancy",
+          "requires_review": false
+        },
+        {
+          "rule_id": "academic.previous_studies_have_shown_002",
+          "start": 723,
+          "end": 750,
+          "before": "Previous studies have shown",
+          "after": "Prior investigations have shown",
+          "category": "clarity",
+          "requires_review": false
+        },
+        {
+          "rule_id": "clarity.in_order_to_002",
+          "start": 1763,
+          "end": 1774,
+          "before": "In order to",
+          "after": "To",
+          "category": "redundancy",
+          "requires_review": false
+        },
+        {
+          "rule_id": "clarity.it_is_worth_noting_that_009",
+          "start": 1554,
+          "end": 1577,
+          "before": "It is worth noting that",
+          "after": "Importantly,",
+          "category": "redundancy",
+          "requires_review": false
+        },
+        {
+          "rule_id": "academic.further_research_is_needed_007",
+          "start": 2358,
+          "end": 2384,
+          "before": "further research is needed",
+          "after": "subsequent investigation is warranted",
+          "category": "style",
+          "requires_review": false
+        },
+        {
+          "rule_id": "clarity.in_conclusion_008",
+          "start": 2195,
+          "end": 2208,
+          "before": "In conclusion",
+          "after": "In summary",
+          "category": "style",
+          "requires_review": false
+        }
+      ],
+      "issues": [],
+      "original_text": "In order to improve reliability in distributed services, this report presents a comprehensive analysis of replicated key-value storage. The proposed architecture separates request routing, consensus, and persistent storage into independently monitored components. Due to the fact that network conditions vary substantially across deployments, the system records both median latency and tail latency during each experiment. The evaluation used 50 cluster nodes and processed 2.4 million requests. The median response time was 18 ms, while the 99th percentile reached 143 ms under a workload containing 30% writes. These results indicate that replication improves availability, but it also introduces coordination overhead.\n\nPrevious studies have shown that leader-based protocols can provide consistent ordering when failures are infrequent. However, a leader can become a bottleneck when clients are geographically dispersed. In this implementation, a three-member quorum was required before a committed value became visible to readers. The protocol did not acknowledge a write when fewer than two replicas confirmed the log entry. This constraint protected consistency during packet loss, although it reduced throughput during recovery. The benchmark achieved 98.6% successful requests under normal conditions and 91.7% during a controlled fault-injection interval. All measurements were collected with a 10 Gbps network and a 4 GB cache. The experiment used a fixed request distribution so that comparisons between configurations remained meaningful.\n\nIt is worth noting that the architecture is not a universal solution. A workload with extremely large values may expose storage amplification, and a workload with highly skewed keys may create hot partitions. In order to address these cases, operators should monitor queue depth, replica lag, and compaction time rather than relying on average latency alone. The current implementation uses a learning rate of 10^-4 only in an auxiliary anomaly detector; this parameter does not affect the consensus protocol itself. The distinction is important because configuration changes in the detector cannot repair a failure in quorum coordination.\n\nIn conclusion, the results demonstrate that explicit quorum rules and structured observability provide a practical foundation for resilient storage. Nevertheless, further research is needed to evaluate regional outages, dynamic membership, and workloads that change over time. A production deployment should therefore combine the protocol with failure drills, capacity planning, and review of the recorded evidence.",
+      "transformed_text": "To improve reliability in distributed services, this report presents a comprehensive analysis of replicated key-value storage. The proposed architecture separates request routing, consensus, and persistent storage into independently monitored components. Because network conditions vary substantially across deployments, the system records both median latency and tail latency during each experiment. The evaluation used 50 cluster nodes and processed 2.4 million requests. The median response time was 18 ms, while the 99th percentile reached 143 ms under a workload containing 30% writes. These results indicate that replication improves availability, but it also introduces coordination overhead.\n\nPrior investigations have shown that leader-based protocols can provide consistent ordering when failures are infrequent. However, a leader can become a bottleneck when clients are geographically dispersed. In this implementation, a three-member quorum was required before a committed value became visible to readers. The protocol did not acknowledge a write when fewer than two replicas confirmed the log entry. This constraint protected consistency during packet loss, although it reduced throughput during recovery. The benchmark achieved 98.6% successful requests under normal conditions and 91.7% during a controlled fault-injection interval. All measurements were collected with a 10 Gbps network and a 4 GB cache. The experiment used a fixed request distribution so that comparisons between configurations remained meaningful.\n\nImportantly, the architecture is not a universal solution. A workload with extremely large values may expose storage amplification, and a workload with highly skewed keys may create hot partitions. To address these cases, operators should monitor queue depth, replica lag, and compaction time rather than relying on average latency alone. The current implementation uses a learning rate of 10^-4 only in an auxiliary anomaly detector; this parameter does not affect the consensus protocol itself. The distinction is important because configuration changes in the detector cannot repair a failure in quorum coordination.\n\nIn summary, the results demonstrate that explicit quorum rules and structured observability provide a practical foundation for resilient storage. Nevertheless, subsequent investigation is warranted to evaluate regional outages, dynamic membership, and workloads that change over time. A production deployment should therefore combine the protocol with failure drills, capacity planning, and review of the recorded evidence.",
+      "metrics_before": {
+        "character_count": 2610,
+        "word_count": 371,
+        "sentence_count": 22,
+        "paragraph_count": 4,
+        "avg_sentence_length": 17.05,
+        "sentence_length_std_dev": 3.86,
+        "type_token_ratio": 0.6739,
+        "flesch_reading_ease": 26.9,
+        "flesch_kincaid_grade": 13.7,
+        "zlib_compression_ratio": 0.5061,
+        "shannon_entropy": 4.3723,
+        "disclaimer": "Notice: Text statistics, compression ratio, Shannon entropy, and readability scores measure surface information density and token distribution. They do not reliably establish authorship, intent, or AI-generated status."
+      },
+      "metrics_after": {
+        "character_count": 2580,
+        "word_count": 359,
+        "sentence_count": 22,
+        "paragraph_count": 4,
+        "avg_sentence_length": 16.5,
+        "sentence_length_std_dev": 3.83,
+        "type_token_ratio": 0.6852,
+        "flesch_reading_ease": 23.19,
+        "flesch_kincaid_grade": 14.08,
+        "zlib_compression_ratio": 0.5054,
+        "shannon_entropy": 4.3846,
+        "disclaimer": "Notice: Text statistics, compression ratio, Shannon entropy, and readability scores measure surface information density and token distribution. They do not reliably establish authorship, intent, or AI-generated status.",
+        "protected_spans_count": 12,
+        "latency_ms": 14.57,
+        "classification": {
+          "content_type": "technical",
+          "confidence": 0.95,
+          "is_already_clear": false,
+          "editing_needs": [
+            "redundancy"
+          ]
+        }
+      },
+      "legacy_endpoint": {
+        "status_code": 200,
+        "success": true,
+        "modifications_count": 11,
+        "output": "To improve reliability in distributed services, this report presents a comprehensive analysis of replicated key-value storage. The proposed architecture separates request routing, consensus, and persistent storage into independently monitored components. Because network conditions vary substantially across deployments, the framework records both median latency and tail latency during every individual experiment. The evaluation used 50 cluster nodes and processed 2.4 million requests. The median response time was 18 ms, while the 99th percentile reached 143 ms under a workload containing 30% writes. These findings indicate that replication improves availability, but it also introduces coordination overhead.\n\nPrior investigations have shown that leader-based protocols can provide consistent ordering when failures are infrequent. However, a leader can become a bottleneck when clients are geographically dispersed. In this implementation, a three-member quorum was required before a committed value became visible to readers. The protocol did not acknowledge a write when fewer than two replicas confirmed the log entry. This constraint protected consistency during packet loss, although it reduced throughput during recovery. The benchmark achieved 98.6% successful requests under normal conditions and 91.7% during a controlled fault-injection interval. All measurements were collected with a 10 Gbps network and a 4 GB cache. The experiment used a fixed request distribution so that comparisons between configurations remained meaningful.\n\nImportantly the architecture is not a universal solution. A workload with extremely large values may expose storage amplification, and a workload with highly skewed keys may create hot partitions. To address these cases, operators should monitor queue depth, replica lag, and compaction time rather than relying on average latency alone. The current implementation uses a learning rate of 10^-4 only in an auxiliary anomaly detector; this parameter does not affect the consensus protocol itself. The distinction is important because configuration changes in the detector cannot repair a failure in quorum coordination.\n\nIn summary, the outcomes demonstrate that explicit quorum rules and structured observability provide a practical foundation for resilient storage. Nevertheless, subsequent investigation is warranted to evaluate regional outages, dynamic membership, and workloads that change over time. A production deployment should therefore combine the protocol with failure drills, capacity planning, and review of the recorded evidence."
+      },
+      "checks": {
+        "api_status_200": true,
+        "api_accepted": true,
+        "output_matches_api": true,
+        "offsets_reference_original": true,
+        "idempotent": true,
+        "meaning_safeguards_have_no_errors": true
+      },
+      "output_changed": true
+    }
+  ],
+  "all_local_checks_pass": true
+}

@@ -5,7 +5,7 @@ import uuid
 from typing import Dict, List, Optional, Sequence, Set, Tuple
 
 from canopus_humanizer.engine.errors import ProtectionError, PLACEHOLDER_CORRUPTED, PROTECTED_SPAN_MISMATCH
-from canopus_humanizer.engine.models import ProtectedSpan
+from canopus_humanizer.engine.models import Change, ProtectedSpan
 
 
 DEFAULT_TECHNICAL_TERMS = {
@@ -294,6 +294,51 @@ class ProtectedSpanRegistry:
                 # Fallback to direct replacement if text already shifted
                 masked = masked.replace(span.original, placeholder, 1)
         return masked
+
+    def remap_changes_to_original(self, changes: Sequence[Change]) -> Tuple[Change, ...]:
+        """Translate change offsets from the masked text back to source offsets.
+
+        Planning runs against a masked representation whose placeholders have
+        different lengths from the protected source spans.  Returning those
+        masked offsets makes audit records and API consumers point at the wrong
+        characters.  Changes cannot intersect placeholders, so each boundary
+        can be translated using the cumulative length delta introduced by the
+        spans before it.
+        """
+        masked_ranges: List[Tuple[int, int, ProtectedSpan]] = []
+        cumulative_delta = 0
+        for placeholder, span in sorted(
+            self._placeholder_map.items(), key=lambda item: item[1].start
+        ):
+            masked_start = span.start + cumulative_delta
+            masked_end = masked_start + len(placeholder)
+            masked_ranges.append((masked_start, masked_end, span))
+            cumulative_delta += len(placeholder) - (span.end - span.start)
+
+        def map_offset(offset: int, is_end: bool = False) -> int:
+            delta = 0
+            for masked_start, masked_end, span in masked_ranges:
+                if offset < masked_start:
+                    return offset - delta
+                if offset <= masked_end:
+                    # A valid edit will not cross a placeholder.  Mapping a
+                    # boundary at either edge remains well-defined as well.
+                    return span.end if is_end else span.start
+                delta += (masked_end - masked_start) - (span.end - span.start)
+            return offset - delta
+
+        return tuple(
+            Change(
+                rule_id=change.rule_id,
+                start=map_offset(change.start),
+                end=map_offset(change.end, is_end=True),
+                before=change.before,
+                after=change.after,
+                category=change.category,
+                requires_review=change.requires_review,
+            )
+            for change in changes
+        )
 
     def restore(self, text: str, original_raw_text: str) -> Tuple[str, bool, List[str]]:
         """

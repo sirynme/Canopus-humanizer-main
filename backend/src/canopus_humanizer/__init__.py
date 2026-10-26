@@ -18,12 +18,13 @@ from canopus_humanizer.engine.errors import (
     ValidationError,
     SecurityError,
     ResourceError,
+    ResourceLimitError,
 )
 from canopus_humanizer.engine.pipeline import Pipeline
 from canopus_humanizer.rules.registry import RuleRegistry
 from canopus_humanizer.rules.schema import RuleDefinition, RulesetDefinition
 
-__version__ = "2.6.0"
+__version__ = "4.2.0"
 
 __all__ = [
     "__version__",
@@ -46,4 +47,5 @@ __all__ = [
     "ValidationError",
     "SecurityError",
     "ResourceError",
+    "ResourceLimitError",
 ]

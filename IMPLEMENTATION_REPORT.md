@@ -1,9 +1,9 @@
 # Canopus Humanizer — Core Engine Implementation Report
 
-**Document Version:** 4.2.0  
-**Engine Version:** 4.0.0 (v1.0.0-compatible)  
-**Date:** 26 October 2026  
-**Status:** Complete, Verified, Benchmarked & Audited  
+- **Document Version:** 4.2.0
+- **Engine Version:** 4.2.0
+- **Date:** 27 October 2026
+- **Status:** Complete, Verified, Benchmarked & Audited
 
 ---
 
@@ -11,7 +11,7 @@
 
 In accordance with the requirements of the **Canopus Humanizer V4.2 — Reliability Fix and Editing Quality Audit**, the engine provides robust, transparent academic and technical editing.
 
-The V4 engine prioritizes grammatical precision, clarity, coherence, concision, and natural expression while strictly preserving authorial meaning, technical accuracy, and factual integrity. It explicitly rejects detector-evasion optimizations in favor of verified writing-quality enhancements, context-aware rule execution, fail-closed validation, and an independent benchmark harness.
+The V4 engine prioritizes grammatical precision, clarity, coherence, concision, and natural expression while strictly safeguarding factual integrity, numeric values, negation polarity, and technical accuracy through layered validation gates. It explicitly rejects detector-evasion optimizations in favor of verified writing-quality enhancements, context-aware rule execution, fail-closed validation, and an independent benchmark harness. Whole-text semantic equivalence is safeguarded via layered lexical and factual gates; human review of diffs remains recommended for nuanced discourse.
 
 All 116 automated unit, integration, property, security, pipeline stage, and benchmark invariant tests pass cleanly (100% success rate, 0 failures, 1 deprecation warning).
 
@@ -142,10 +142,11 @@ A version-controlled benchmark suite (`tests/benchmark/`) evaluates original, le
 *Note: These figures represent observed benchmark metrics on the specified 10-sample evaluation corpus and do not constitute an unconstrained universal guarantee for arbitrary input text.*
 
 - **Preservation Rate**: 100.0% of protected spans (citations, LaTeX math, percentages, numbers, URLs, negations) preserved across all 10 benchmark samples.
-- **Transformation Rate on Opportunities**: 100.0% of targeted flaws corrected.
-- **Unnecessary Edits on Clear Text**: Exactly 0 changes made by V4 on clear text samples (sample 04 and sample 09; legacy engine made 16 and 26 unnecessary changes respectively).
+- **Transformation Rate on Opportunities**: 100.0% of targeted flaws corrected across the 10 authored test cases. *Limitation Disclosure*: Literal expected-string matching measures conformity with bundled ruleset targets and may undercount valid alternative stylistic rewrites.
+- **Unnecessary Edits & Change Budgets**: Evaluated for all 10 samples. Clear text samples (04 and 09) had exactly 0 unnecessary edits. All other samples remained strictly within their configured `max_unnecessary_changes` thresholds (legacy engine exceeded budgets by up to 26 extraneous edits).
 - **Grammar Errors Corrected**: V4 successfully resolved 100% of tested grammatical errors (4 of 4 in sample 05); legacy engine resolved 0%.
 - **Punctuation Hygiene**: Fixed introductory adverb spacing (`Importantly, this` vs legacy `Importantly this`).
+- **Benchmark Runner Isolation**: Benchmark invariant tests run entirely in-memory with zero disk write side-effects, guaranteeing that committed `benchmark_results.json` is never overwritten during regular test runs.
 - **Average Latency**: ~4.5ms (sub-10ms for multi-paragraph documents under local execution).
 
 ---
@@ -153,10 +154,10 @@ A version-controlled benchmark suite (`tests/benchmark/`) evaluates original, le
 ## 6. Verification Status & Test Reconciliation
 
 ### Exact Pytest Execution Summary
-All 116 automated tests passed cleanly (0 failed, 0 skipped, 1 deprecation warning in ~1.9s):
+All 125 automated tests pass cleanly (0 failed, 0 skipped, 1 deprecation warning in ~1.9s):
 
 ```text
-======================== 116 passed, 1 warning in 1.87s ========================
+======================== 125 passed, 1 warning in 1.88s ========================
 ```
 *(Warning: `StarletteDeprecationWarning: Using httpx with starlette.testclient is deprecated; install httpx2 instead.`)*
 
@@ -180,29 +181,27 @@ All 116 automated tests passed cleanly (0 failed, 0 skipped, 1 deprecation warni
   - `test_v4_pipeline_stages.py`: 6
   - `test_v4_robustness.py`: 10
   - `test_validation_and_safeguards.py`: 4
-- `tests/integration/`: **23 passed**
-  - `test_api_endpoints.py`: 5
+- `tests/integration/`: **29 passed**
+  - `test_api_endpoints.py`: 11 (includes 6 new domain-exception and robustness tests)
   - `test_cli.py`: 5
   - `test_discovered_regressions.py`: 9 (includes `test_regression_planner_typing_imports`)
   - `test_pipeline_e2e.py`: 4
 - `tests/property/`: **5 passed** (`test_engine_properties.py`)
 - `tests/security/`: **5 passed** (`test_security_defenses.py`)
-- `tests/benchmark/`: **5 passed** (`test_benchmark_invariants.py`)
-- **Total: 116 tests**
+- `tests/benchmark/`: **8 passed** (`test_benchmark_invariants.py`, including change-budget evaluation, runner isolation, and committed consistency verification)
+- **Total: 125 tests**
 
-### Reconciliation of Historical 126 vs 115 Discrepancy
-In earlier drafts of the report, category totals listed 126 because functional sub-categories were counted alongside top-level directory counts:
-1. `Security & limits tests: 15` are inside `tests/unit/` (`test_security_archive.py` [5] + `test_security_limits_paths.py` [10]).
-2. `V4 pipeline & robustness: 16` are inside `tests/unit/` (`test_v4_pipeline_stages.py` [6] + `test_v4_robustness.py` [10]).
-3. `Discovered regression tests: 8` were inside `tests/integration/` (`test_discovered_regressions.py`).
-When counted strictly by physical directory, the original suite contained 115 tests. With the addition of `test_regression_planner_typing_imports` in V4.2, the current suite contains exactly **116 tests**.
+### Reconciliation of Test Suite Growth
+- Original baseline suite: 115 tests
+- V4.2 candidate commit: 116 tests (+1 in `test_discovered_regressions.py`)
+- Release blocker remediation: **125 tests** (+6 in `test_api_endpoints.py`, +3 in `test_benchmark_invariants.py`)
 
 ---
 
 ## 7. Assumptions, Verified Scope, and Known Limitations
 
 ### Verified Behaviors and Components
-- **API Endpoints**: `GET /v1/health`, `GET /v1/rulesets`, `POST /v1/citations/format`, `POST /v1/humanize` (legacy compatibility), and `POST /v1/transform` verified live via FastAPI TestClient.
+- **API Endpoints & Exception Handling**: `GET /v1/health`, `GET /v1/rulesets`, `POST /v1/citations/format`, `POST /v1/humanize`, and `POST /v1/transform` verified live via FastAPI TestClient and separate local HTTP Uvicorn process. Structured exception handlers map `InputError` (HTTP 400), `RulesetError` (HTTP 404/400), and `ResourceError` (HTTP 413/422) to standardized JSON envelopes without leaking stack traces or internal paths.
 - **Rule Packs**: Verified all 4 active rulesets (`base` [30 rules], `academic` [25 rules], `technical` [14 rules], `grammar` [12 rules]) load cleanly with valid SHA-256 integrity hashes.
 - **Protected Span Invariants**: Proved byte-for-byte preservation of inline math (`$p < 0.05$`), citations (`Smith et al., 2021`), URLs, floats (`0.001`), percentages (`94.2%`), negations (`do not`), and polarity phrases (`under no circumstances`).
 - **No-Op Suppression**: Proved 0 changes on already-clear passages across multiple domains.
@@ -211,7 +210,13 @@ When counted strictly by physical directory, the original suite contained 115 te
 - **Reliability Fix**: Verified `ChangePlanner.plan` typing imports (`Any`, `Optional`) under runtime reflection `typing.get_type_hints`.
 
 ### Known Limitations & Scope Boundaries
-- **Lexical/Rule-Based Engine**: The core deterministic provider operates via compiled regex rules, dictionary lookup, and token heuristics. It does not perform deep neural dependency parsing.
-- **Protected Span Delimiters**: Nonce masking relies on standard academic syntax patterns (e.g., standard LaTeX delimiters, recognized inline citation conventions, standard numeric notation). Unconventional or malformed syntax may not be shielded by the default span detector.
-- **Corpus vs Universal Guarantees**: Benchmark preservation (100%) and error resolution (100%) reflect demonstrated behavior on the 10 benchmark samples and invariant test suite; semantic preservation cannot be guaranteed for arbitrary adversarial text without semantic validation rejecting or accepting.
+- **Preservation Tiers & Semantic Guarantees**:
+  1. *Exact Protected Span Preservation*: Verifiable byte-for-byte masking and replacement for citations, LaTeX math, code tokens, URLs, and numbers.
+  2. *Numeric and Negation Verification*: Token set matching gates that fail closed if numbers or negation tokens (`not`, `never`, `cannot`, etc.) are altered or dropped.
+  3. *Heuristic Polarity & Certainty Checks*: Directional word lists and modal certainty counters catch coarse inversions and qualification shifts, but do not understand syntactic nuances.
+  4. *Whole-Text Semantic Equivalence*: NOT universally guaranteed. The engine relies on rule-based lexical transformations and token heuristics without deep natural language inference (NLI) or semantic dependency parsing. Human review of diffs is essential.
+- **Benchmark Corpus vs Universal Generalization**:
+  The 100% transformation and preservation scores represent observed performance on the 10 authored benchmark regression samples (`tests/benchmark/benchmark_samples.json`). Because the benchmark tests exact literal substrings, valid alternative editorial choices may be undercounted. The benchmark results must not be generalized as universal guarantees for arbitrary natural text.
+- **Continuous Integration vs Branch Protection**:
+  Continuous integration is codified in `.github/workflows/ci.yml`. However, repository branch protection cannot be enforced through local repository code alone; an authorized repository owner must configure GitHub branch protection rules to require status checks before merge.
 - **Optional Model Provider**: The interface for neural model providers is defined and tested via mocks, but disabled by default in the deterministic local distribution.

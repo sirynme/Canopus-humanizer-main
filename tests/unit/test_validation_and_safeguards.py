@@ -31,6 +31,24 @@ def test_validator_numeric_preservation():
     assert any(i.code == "NUMERIC_VALUE_ALTERED" and i.severity == "error" for i in issues)
 
 
+def test_validator_rejects_duplicate_numeric_tokens():
+    """Adding a second copy of a protected numeric value is not preservation."""
+    validator = OutputValidator()
+    issues = validator.validate("Accuracy was 98.6%.", "Accuracy was 98.6% and 98.6%.", [])
+    assert any(i.code == "NUMERIC_VALUE_ALTERED" and i.severity == "error" for i in issues)
+
+
+def test_validator_rejects_dropped_repeated_protected_span():
+    """Repeated protected text must retain its original multiplicity."""
+    validator = OutputValidator()
+    spans = [
+        ProtectedSpan("s1", 0, 6, "term", "98.6%", "test"),
+        ProtectedSpan("s2", 7, 13, "term", "98.6%", "test"),
+    ]
+    issues = validator.validate("98.6% 98.6%", "98.6%", spans)
+    assert any(i.code == "PROTECTED_SPAN_MISMATCH" and i.severity == "error" for i in issues)
+
+
 def test_validator_negation_preservation():
     validator = OutputValidator()
     orig = "The method is not suitable for realtime streams."

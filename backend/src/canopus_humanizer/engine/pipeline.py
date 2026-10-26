@@ -46,7 +46,7 @@ class Pipeline:
         limits: Optional[ResourceLimits] = None,
         audit_logger: Optional[AuditLogger] = None,
         provider: Optional[EditingProvider] = None,
-        version: str = "4.0.0",
+        version: str = "4.2.0",
     ):
         self.engine_version = version
         self.registry = registry or RuleRegistry()
@@ -160,6 +160,7 @@ class Pipeline:
         restored_text, restore_ok, restore_errors = span_registry.restore(
             transformed_masked, original_raw_text=raw_text
         )
+        reported_changes = span_registry.remap_changes_to_original(approved_changes)
 
         all_issues = list(plan_issues)
         for err in restore_errors:
@@ -205,13 +206,13 @@ class Pipeline:
         if provider_notes:
             metrics["provider_notes"] = provider_notes
 
-        rules_applied = tuple([c.rule_id for c in approved_changes]) if accepted else ()
+        rules_applied = tuple([c.rule_id for c in reported_changes]) if accepted else ()
         ruleset_versions = self.registry.get_version_info(request.ruleset_ids)
 
         result = TransformResult(
             original_text=raw_text,
             transformed_text=final_text,
-            changes=approved_changes if accepted else (),
+            changes=reported_changes if accepted else (),
             issues=tuple(all_issues),
             engine_version=self.engine_version,
             ruleset_versions=ruleset_versions,

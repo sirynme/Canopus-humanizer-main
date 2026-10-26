@@ -5,7 +5,7 @@ import os
 import sys
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 # Ensure paths
 repo_root = Path(__file__).resolve().parent.parent.parent
@@ -22,7 +22,7 @@ from canopus_humanizer.metrics.metrics import TextMetricsCalculator
 from canopus_humanizer.rules.registry import RuleRegistry
 
 
-def run_benchmark() -> Dict[str, Any]:
+def run_benchmark(output_path: Optional[Path] = None, save_results: bool = False) -> Dict[str, Any]:
     benchmark_file = Path(__file__).resolve().parent / "benchmark_samples.json"
     with open(benchmark_file, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -30,7 +30,7 @@ def run_benchmark() -> Dict[str, Any]:
     samples = data["samples"]
     metrics_calc = TextMetricsCalculator()
     reg = RuleRegistry()
-    pipeline_v4 = Pipeline(registry=reg, version="4.0.0")
+    pipeline_v4 = Pipeline(registry=reg, version="4.2.0")
     modifier_legacy = DocumentModifier(seed=42)
 
     results = []
@@ -81,9 +81,15 @@ def run_benchmark() -> Dict[str, Any]:
         preservation_rate_leg = (len(preserved_leg) / len(must_preserve)) if must_preserve else 1.0
         banned_in_leg = [token for token in must_not_contain if token in legacy_out]
 
-        unnecessary_edits_v4 = 0
+        # Evaluate unnecessary edits for all samples
         if cat == "clear_well_written":
             unnecessary_edits_v4 = len(v4_res.changes)
+            unnecessary_edits_legacy = modifier_legacy.total_transforms
+        else:
+            # Edits beyond targeted flaw transformations for this sample
+            targeted_count = len(must_transform)
+            unnecessary_edits_v4 = max(0, len(v4_res.changes) - targeted_count)
+            unnecessary_edits_legacy = max(0, modifier_legacy.total_transforms - targeted_count)
 
         sample_eval = {
             "id": sid,
@@ -95,6 +101,8 @@ def run_benchmark() -> Dict[str, Any]:
             "v4_transformation_rate": round(transformation_rate_v4, 3),
             "v4_banned_terms_detected": banned_in_v4,
             "v4_unnecessary_edits": unnecessary_edits_v4,
+            "legacy_unnecessary_edits": unnecessary_edits_legacy,
+            "max_unnecessary_changes": max_unnecessary,
             "v4_latency_ms": round(t_v4, 2),
             "legacy_changes_count": modifier_legacy.total_transforms,
             "legacy_preservation_rate": round(preservation_rate_leg, 3),
@@ -109,22 +117,29 @@ def run_benchmark() -> Dict[str, Any]:
         results.append(sample_eval)
 
     report = {
-        "benchmark_version": data.get("version", "4.0.0"),
+        "benchmark_version": data.get("version", "4.2.0"),
         "timestamp": time.time(),
         "total_samples": len(samples),
         "results": results,
     }
 
-    # Save to json file
-    output_path = Path(__file__).resolve().parent / "benchmark_results.json"
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(report, f, indent=2)
+    # Save to json file only when requested
+    if save_results or output_path is not None:
+        target_file = output_path or (Path(__file__).resolve().parent / "benchmark_results.json")
+        with open(target_file, "w", encoding="utf-8") as f:
+            json.dump(report, f, indent=2)
 
     return report
 
 
 if __name__ == "__main__":
-    rep = run_benchmark()
+    import argparse
+    parser = argparse.ArgumentParser(description="Canopus Humanizer Benchmark Runner")
+    parser.add_argument("--no-save", action="store_true", help="Do not save results to file")
+    parser.add_argument("--output", type=Path, default=None, help="Custom output path for results JSON")
+    cli_args = parser.parse_args()
+
+    rep = run_benchmark(output_path=cli_args.output, save_results=not cli_args.no_save)
     print("=" * 80)
     print(f"CANOPUS HUMANIZER V4 BENCHMARK REPORT ({rep['total_samples']} Samples)")
     print("=" * 80)
@@ -134,7 +149,7 @@ if __name__ == "__main__":
         print(f"  V4 Preservation     : {r['v4_preservation_rate'] * 100:.1f}%")
         print(f"  V4 Transformation   : {r['v4_transformation_rate'] * 100:.1f}%")
         print(f"  V4 Changes / Legacy : {r['v4_changes_count']} changes vs {r['legacy_changes_count']} changes")
-        print(f"  V4 Unnecessary Edits: {r['v4_unnecessary_edits']}")
+        print(f"  V4 Unnecessary Edits: {r['v4_unnecessary_edits']} (Max Allowed: {r['max_unnecessary_changes']})")
         print(f"  V4 Banned Terms     : {r['v4_banned_terms_detected'] or 'None'}")
         print(f"  Legacy Banned Terms : {r['legacy_banned_terms_detected'] or 'None'}")
         print(f"  Flesch Reading Ease : Original={r['readability']['original_flesch']}, V4={r['readability']['v4_flesch']}")

@@ -1,0 +1,240 @@
+{
+  "source_corpus": "corpus_csLG_2026-10-27.json",
+  "field": "cs.LG",
+  "paper_count": 500,
+  "date_filter": "2015-01-01 through 2022-11-30",
+  "sentence_count": 3618,
+  "word_count": 84076,
+  "sentence_length_words": {
+    "mean": 23.2383,
+    "sample_sd": 9.4414,
+    "cv": 0.4063,
+    "min": 1,
+    "max": 83,
+    "pct_le_10": 4.754,
+    "pct_ge_30": 21.8353
+  },
+  "common_sentence_length_sequences_per_abstract": [
+    {
+      "sequence": [
+        12,
+        18,
+        13,
+        15,
+        17,
+        9,
+        21,
+        12
+      ],
+      "abstracts": 1
+    },
+    {
+      "sequence": [
+        27,
+        34,
+        45,
+        20
+      ],
+      "abstracts": 1
+    },
+    {
+      "sequence": [
+        23,
+        51,
+        12,
+        18,
+        23,
+        14,
+        39,
+        12,
+        31
+      ],
+      "abstracts": 1
+    },
+    {
+      "sequence": [
+        25,
+        11,
+        31,
+        19,
+        18,
+        21,
+        39
+      ],
+      "abstracts": 1
+    },
+    {
+      "sequence": [
+        19,
+        16,
+        19,
+        18,
+        14,
+        13,
+        22,
+        38
+      ],
+      "abstracts": 1
+    },
+    {
+      "sequence": [
+        34,
+        15,
+        16,
+        15,
+        22,
+        9,
+        16,
+        50
+      ],
+      "abstracts": 1
+    },
+    {
+      "sequence": [
+        28,
+        32,
+        18,
+        13,
+        28,
+        23,
+        23,
+        22,
+        24,
+        25
+      ],
+      "abstracts": 1
+    },
+    {
+      "sequence": [
+        8,
+        28,
+        22,
+        17,
+        21,
+        11,
+        26,
+        14,
+        29,
+        37,
+        20
+      ],
+      "abstracts": 1
+    },
+    {
+      "sequence": [
+        21,
+        30,
+        28,
+        35
+      ],
+      "abstracts": 1
+    },
+    {
+      "sequence": [
+        14,
+        21,
+        22,
+        18,
+        34,
+        11,
+        30
+      ],
+      "abstracts": 1
+    }
+  ],
+  "transition_rates_per_1000_words": {
+    "furthermore": {
+      "count": 40,
+      "rate": 0.4758
+    },
+    "moreover": {
+      "count": 41,
+      "rate": 0.4877
+    },
+    "additionally": {
+      "count": 12,
+      "rate": 0.1427
+    },
+    "however": {
+      "count": 141,
+      "rate": 1.6771
+    },
+    "therefore": {
+      "count": 24,
+      "rate": 0.2855
+    },
+    "finally": {
+      "count": 51,
+      "rate": 0.6066
+    },
+    "in conclusion": {
+      "count": 1,
+      "rate": 0.0119
+    },
+    "in summary": {
+      "count": 0,
+      "rate": 0.0
+    },
+    "in this paper": {
+      "count": 150,
+      "rate": 1.7841
+    },
+    "in this work": {
+      "count": 74,
+      "rate": 0.8802
+    },
+    "we propose": {
+      "count": 178,
+      "rate": 2.1171
+    },
+    "we show": {
+      "count": 83,
+      "rate": 0.9872
+    },
+    "we find": {
+      "count": 14,
+      "rate": 0.1665
+    }
+  },
+  "specificity": {
+    "numbers_total": 749,
+    "numbers_per_1000_words": 8.9086,
+    "pct_papers_with_at_least_one_number": 44.4,
+    "pct_papers_naming_dataset_or_method": 90.8,
+    "pct_abstracts_starting_in_this_paper_or_work": 6.8,
+    "dataset_method_indicator_regex": "\\b(?:dataset|data set|corpus|benchmark|algorithm|method|approach|framework|model|architecture|network|classifier|regression|transformer|simulation|experiment|training set|test set|evaluation set)\\b"
+  },
+  "clause_positions": {
+    "sample_size_sentences": 100,
+    "method": "Deterministic marker rules using subordinating conjunction/relative-clause markers; sample is first 100 segmented sentences, with marker taxonomy recorded for audit.",
+    "counts": {
+      "end": 8,
+      "middle": 22,
+      "start": 7
+    },
+    "percent_of_marked_sample": {
+      "end": 21.6216,
+      "middle": 59.4595,
+      "start": 18.9189
+    },
+    "markers": [
+      "although",
+      "because",
+      "if",
+      "since",
+      "unless",
+      "when",
+      "while",
+      "whereas",
+      "which",
+      "who",
+      "that",
+      "as",
+      "before",
+      "after",
+      "once",
+      "though",
+      "whether"
+    ]
+  }
+}

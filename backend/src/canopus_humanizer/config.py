@@ -25,7 +25,7 @@ class ConfigNamespace:
 
         # Core Identity
         self.APP_NAME: str = d.get("app_name", "canopus-humanizer")
-        self.VERSION: str = d.get("version", "2.6.0")
+        self.VERSION: str = d.get("version", "4.2.0")
         self.ENVIRONMENT: str = os.getenv("ENVIRONMENT", d.get("environment", "production"))
 
         # Pipeline Aggressiveness & Style Defaults

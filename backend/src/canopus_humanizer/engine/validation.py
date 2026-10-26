@@ -1,6 +1,7 @@
 """Semantic, factual, and structural output validation."""
 
 import re
+from collections import Counter
 from typing import Dict, List, Sequence, Set, Tuple
 
 from canopus_humanizer.engine.errors import (
@@ -146,6 +147,44 @@ class OutputValidator:
         uncertain = [w for w in words if w in UNCERTAINTY_MODALS]
         return certain, uncertain
 
+    @staticmethod
+    def _count_unshadowed_occurrences(
+        text: str,
+        target: str,
+        protected_texts: Sequence[str],
+    ) -> int:
+        """Count target spans while ignoring occurrences nested in larger spans.
+
+        For example, ``1`` is also present inside the protected citation
+        ``[1, 2]``.  Counting raw substrings would incorrectly report a
+        duplicated number even though the citation is one protected span.
+        """
+        larger_texts = tuple(
+            value for value in set(protected_texts) if len(value) > len(target)
+        )
+        count = 0
+        start = 0
+        while True:
+            index = text.find(target, start)
+            if index == -1:
+                break
+            end = index + len(target)
+            shadowed = False
+            for larger in larger_texts:
+                larger_start = text.find(larger, max(0, index - len(larger) + 1))
+                while larger_start != -1 and larger_start < end:
+                    larger_end = larger_start + len(larger)
+                    if larger_start <= index and end <= larger_end:
+                        shadowed = True
+                        break
+                    larger_start = text.find(larger, larger_start + 1)
+                if shadowed:
+                    break
+            if not shadowed:
+                count += 1
+            start = index + max(1, len(target))
+        return count
+
     def validate(
         self,
         original_text: str,
@@ -158,14 +197,25 @@ class OutputValidator:
         """
         issues: List[ValidationIssue] = []
 
-        # 1. Exact Protected Span Equality Check
-        for span in protected_spans:
-            if span.original not in transformed_text:
+        # 1. Exact Protected Span Equality Check.  A membership check alone
+        # lets a transform drop one repeated span or duplicate another one.
+        expected_spans = Counter(span.original for span in protected_spans)
+        protected_texts = tuple(expected_spans)
+        for original, expected_count in expected_spans.items():
+            actual_count = self._count_unshadowed_occurrences(
+                transformed_text,
+                original,
+                protected_texts,
+            )
+            if actual_count != expected_count:
                 issues.append(
                     ValidationIssue(
                         code=PROTECTED_SPAN_MISMATCH,
                         severity="error",
-                        message=f"Protected span '{span.original}' ({span.kind}) is missing from transformed text.",
+                        message=(
+                            f"Protected span '{original}' occurred {actual_count} times "
+                            f"after transformation; expected {expected_count}."
+                        ),
                     )
                 )
 
@@ -174,15 +224,22 @@ class OutputValidator:
             orig_numbers = self.extract_numbers(original_text)
             trans_numbers = self.extract_numbers(transformed_text)
 
-            for num in orig_numbers:
-                if num not in trans_numbers:
-                    issues.append(
-                        ValidationIssue(
-                            code="NUMERIC_VALUE_ALTERED",
-                            severity="error",
-                            message=f"Original numeric value '{num}' was altered or dropped during transformation.",
+            original_counts = Counter(orig_numbers)
+            transformed_counts = Counter(trans_numbers)
+            if original_counts != transformed_counts:
+                for num, expected_count in original_counts.items():
+                    actual_count = transformed_counts.get(num, 0)
+                    if actual_count != expected_count:
+                        issues.append(
+                            ValidationIssue(
+                                code="NUMERIC_VALUE_ALTERED",
+                                severity="error",
+                                message=(
+                                    f"Original numeric value '{num}' occurred {actual_count} times "
+                                    f"after transformation; expected {expected_count}."
+                                ),
+                            )
                         )
-                    )
 
         # 3. Negation Preservation Check
         if self.strict_negation:

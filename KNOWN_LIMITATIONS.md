@@ -5,12 +5,16 @@
 
 ---
 
-## 1. Semantic Equivalence Boundaries
+## 1. Semantic Equivalence & Preservation Tiers
 
-- **Rule-Based Heuristics Do Not Guarantee Universal Semantic Equivalence**:  
-  While the engine enforces strict negation, modal qualification, and numeric preservation gates, rule-driven phrase replacements can produce subtle tone or register shifts depending on context. For high-stakes legal, medical, or doctoral submissions, human review of the generated diff remains essential.
-- **Evaluation Corpus Scope**:  
-  Reported benchmark preservation (100.0%) and error resolution (100.0%) reflect performance on the documented 10-sample evaluation corpus (`tests/benchmark/benchmark_samples.json`) and invariant test suites. These results demonstrate engine correctness on tested patterns but do not constitute an unconstrained universal guarantee for arbitrary, unreviewed prose.
+- **Four Distinct Preservation Tiers**:
+  1. *Exact Protected Span Preservation (Deterministic)*: Inline LaTeX equations, citations, code tokens, URLs, percentages, and units are masked with cryptographic nonces before rewriting and restored byte-for-byte. If any nonce is missing or altered, the engine strictly fails closed.
+  2. *Numeric & Negation Preservation (Token Sets)*: Numbers, currency, and explicit negation words (`not`, `never`, `cannot`, `without`, etc.) are checked via token extraction. Any dropped or added number or negation aborts the transformation.
+  3. *Directional Polarity & Certainty Checks (Heuristic)*: Shifts between certainty (`must`, `proven`) and uncertainty (`may`, `plausible`) trigger validation warnings. Inversions between positive and negative findings trigger validation rejection. These checks are lexical and do not perform syntactic dependency parsing.
+  4. *Whole-Text Semantic Equivalence (Not Guaranteed)*: Rule-based substitutions and lexical heuristics do not guarantee universal semantic equivalence across unreviewed, arbitrary prose. Subtle nuance, tone shifts, or idiomatic context may be affected. For high-stakes academic, legal, or clinical submissions, human review of the generated diff remains mandatory.
+
+- **Benchmark Exact-String Matching Limitations**:
+  Reported benchmark preservation (100.0%) and error resolution (100.0%) reflect performance on the documented 10-sample evaluation corpus (`tests/benchmark/benchmark_samples.json`). The benchmark checks exact literal target strings (e.g. `Prior investigations have shown`). Valid alternative rewrites (e.g. `Previous studies indicate`) are scored as 0% by exact-string matching, which undercounts legitimate stylistic variety. These scores demonstrate engine fidelity to configured rulesets, not universal perfection across arbitrary documents.
 
 ## 2. Protected Span Incompleteness Risk
 
@@ -48,5 +52,7 @@
   Default resource limits cap uploads at 5MB raw text and 25MB decompressed archives. Larger enterprise document batches require streaming or batch chunking.
 - **Type-Hint Reflection Compatibility**:  
   Runtime reflection via `typing.get_type_hints` requires explicit typing imports across all public classes. This was confirmed and verified in `engine/planner.py` during V4.2 audit.
-- **Infrastructure Security**:  
-  While the core engine performs all transformations in memory and never retains uploaded files, overall privacy depends on the host operating system, TLS termination, and reverse-proxy logging configuration in production deployments.
+- **API Error Handling & Production Readiness**:
+  Structured FastAPI exception handlers map known domain exceptions (`InputError`, `RulesetError`, `ResourceLimitError`, `SecurityError`, `ValidationError`) into standardized 4xx JSON envelopes without exposing paths or stack traces. Unexpected internal exceptions remain HTTP 500 server errors. Production deployments must provide reverse-proxy TLS termination, rate limiting, and authenticated access.
+- **Continuous Integration & Branch Protection Boundaries**:
+  Automated tests and invariant checks execute via `.github/workflows/ci.yml`. However, GitHub branch protection cannot be enforced through repository files alone; an authorized repository owner must manually require the CI status check in GitHub repository settings.

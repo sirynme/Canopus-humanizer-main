@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "created": "2026-10-27",
+  "provenance": "Synthetic AI-style evaluation text authored for this local test; not a claim about any external model.",
+  "samples": [
+    {
+      "id": "short_general_65w",
+      "level": "short",
+      "domain": "general",
+      "text": "In today's rapidly evolving world, technology plays a crucial role in shaping how people communicate, work, and learn. It is important to recognize that digital tools offer numerous benefits, but they also create significant challenges. By embracing innovation in a thoughtful manner, communities can improve productivity and strengthen collaboration. Ultimately, a balanced approach is essential because progress should serve people rather than replace human judgement."
+    },
+    {
+      "id": "medium_academic_152w",
+      "level": "medium",
+      "domain": "academic",
+      "text": "Due to the fact that online learning has expanded considerably, researchers have conducted numerous studies to evaluate its educational effectiveness. Previous studies have shown that structured digital courses can improve access for students who face geographic or financial barriers. However, it is worth noting that access alone does not guarantee meaningful learning. In a survey of 1,240 university students, 68.4% reported that recorded lectures were useful, while only 41.2% preferred them to interactive seminars (Rahman et al., 2021). The findings suggest that technology is most valuable when it supports deliberate instructional design rather than replacing it. In order to interpret these results responsibly, future investigations should examine differences in discipline, prior preparation, and internet reliability. It is also important to acknowledge that the study did not measure long-term retention. Consequently, the evidence supports a cautious conclusion: digital delivery can broaden participation, but its educational impact depends on how learning activities are organised."
+    },
+    {
+      "id": "long_technical_367w",
+      "level": "long",
+      "domain": "technical",
+      "text": "In order to improve reliability in distributed services, this report presents a comprehensive analysis of replicated key-value storage. The proposed architecture separates request routing, consensus, and persistent storage into independently monitored components. Due to the fact that network conditions vary substantially across deployments, the system records both median latency and tail latency during each experiment. The evaluation used 50 cluster nodes and processed 2.4 million requests. The median response time was 18 ms, while the 99th percentile reached 143 ms under a workload containing 30% writes. These results indicate that replication improves availability, but it also introduces coordination overhead.\n\nPrevious studies have shown that leader-based protocols can provide consistent ordering when failures are infrequent. However, a leader can become a bottleneck when clients are geographically dispersed. In this implementation, a three-member quorum was required before a committed value became visible to readers. The protocol did not acknowledge a write when fewer than two replicas confirmed the log entry. This constraint protected consistency during packet loss, although it reduced throughput during recovery. The benchmark achieved 98.6% successful requests under normal conditions and 91.7% during a controlled fault-injection interval. All measurements were collected with a 10 Gbps network and a 4 GB cache. The experiment used a fixed request distribution so that comparisons between configurations remained meaningful.\n\nIt is worth noting that the architecture is not a universal solution. A workload with extremely large values may expose storage amplification, and a workload with highly skewed keys may create hot partitions. In order to address these cases, operators should monitor queue depth, replica lag, and compaction time rather than relying on average latency alone. The current implementation uses a learning rate of 10^-4 only in an auxiliary anomaly detector; this parameter does not affect the consensus protocol itself. The distinction is important because configuration changes in the detector cannot repair a failure in quorum coordination.\n\nIn conclusion, the results demonstrate that explicit quorum rules and structured observability provide a practical foundation for resilient storage. Nevertheless, further research is needed to evaluate regional outages, dynamic membership, and workloads that change over time. A production deployment should therefore combine the protocol with failure drills, capacity planning, and review of the recorded evidence."
+    }
+  ]
+}

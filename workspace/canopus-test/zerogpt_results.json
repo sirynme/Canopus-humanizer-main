@@ -1,0 +1,92 @@
+{
+  "detector": "ZeroGPT",
+  "date": "2026-10-27",
+  "source": "https://zerogpt.net/ai-content-detector",
+  "account_created": false,
+  "scans": [
+    {
+      "detector": "ZeroGPT",
+      "url": "https://zerogpt.net/ai-content-detector",
+      "scan_id": "short_general_65w__original",
+      "sample_id": "short_general_65w",
+      "variant": "original",
+      "characters": 470,
+      "words": 65,
+      "status": "completed",
+      "result_url": "https://app.zerogpt.net/results/5be01cb3-b397-47b2-9a07-9767c5d99aca?src=site",
+      "ai_score_percent": 100,
+      "ai_like_percent": 100,
+      "human_like_percent": 0,
+      "reported_word_count": 65,
+      "result_excerpt": "AI Detectors AI Humanizer API Pricing English System Log In Get Started for Free ZeroGPT Pro Higher usage limits, batch detection, detailed PDF reports, and an ad-free experience. Upgrade to Pro From $14.99/month Detection Result Completed in 21.0s • Oct 26, 2026, 7:59 PM Humanize AI Text Scan Another Share Export PDF New Scan Upload File History Batch Scan AI Content Detector 470/15000 characters• ✓ Minimum 250 characters New Scan Clear text Upload File Rescan content Paragraph Classification Breakdown 100% AI-like • 0% Human-like • 0% Uncertain • 65 words • 470 characters • English How to read this result 100% AI SCORE Give Feedback New Scan DETECTION SUMMARY This text appears to be AI-gen"
+    },
+    {
+      "detector": "ZeroGPT",
+      "url": "https://zerogpt.net/ai-content-detector",
+      "scan_id": "short_general_65w__humanized",
+      "sample_id": "short_general_65w",
+      "variant": "humanized",
+      "characters": 470,
+      "words": 65,
+      "status": "completed",
+      "result_url": "https://app.zerogpt.net/results/2b3032f0-f253-435a-8ea9-d69056431bc0?src=site",
+      "ai_score_percent": 100,
+      "ai_like_percent": 100,
+      "human_like_percent": 0,
+      "reported_word_count": 65,
+      "result_excerpt": "AI Detectors AI Humanizer API Pricing English System Log In Get Started for Free ZeroGPT Pro Higher usage limits, batch detection, detailed PDF reports, and an ad-free experience. Upgrade to Pro From $14.99/month Detection Result Completed in 20.9s • Oct 26, 2026, 8:00 PM Humanize AI Text Scan Another Share Export PDF New Scan Upload File History Batch Scan AI Content Detector 470/15000 characters• ✓ Minimum 250 characters New Scan Clear text Upload File Rescan content Paragraph Classification Breakdown 100% AI-like • 0% Human-like • 0% Uncertain • 65 words • 470 characters • English How to read this result 100% AI SCORE Give Feedback New Scan DETECTION SUMMARY This text appears to be AI-gen"
+    },
+    {
+      "detector": "ZeroGPT",
+      "url": "https://zerogpt.net/ai-content-detector",
+      "scan_id": "medium_academic_152w__original",
+      "sample_id": "medium_academic_152w",
+      "variant": "original",
+      "characters": 1098,
+      "words": 152,
+      "status": "completed",
+      "result_url": "https://app.zerogpt.net/results/8210d763-4cde-43f4-b3f9-5a58f2506fd7?src=site",
+      "ai_score_percent": 100,
+      "ai_like_percent": 100,
+      "human_like_percent": 0,
+      "reported_word_count": 152,
+      "result_excerpt": "AI Detectors AI Humanizer API Pricing English System Log In Get Started for Free ZeroGPT Pro Higher usage limits, batch detection, detailed PDF reports, and an ad-free experience. Upgrade to Pro From $14.99/month Detection Result Completed in 22.0s • Oct 26, 2026, 8:00 PM Humanize AI Text Scan Another Share Export PDF New Scan Upload File History Batch Scan AI Content Detector 1098/15000 characters• ✓ Minimum 250 characters New Scan Clear text Upload File Rescan content Paragraph Classification Breakdown 100% AI-like • 0% Human-like • 0% Uncertain • 152 words • 1,098 characters • English How to read this result 100% AI SCORE Give Feedback New Scan DETECTION SUMMARY This text appears to be AI"
+    },
+    {
+      "detector": "ZeroGPT",
+      "url": "https://zerogpt.net/ai-content-detector",
+      "scan_id": "medium_academic_152w__humanized",
+      "sample_id": "medium_academic_152w",
+      "variant": "humanized",
+      "characters": 1069,
+      "words": 142,
+      "status": "blocked_or_failed",
+      "error": "page.waitForURL: Timeout 120000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"**/results/**\" until \"load\"\n============================================================",
+      "final_url": "https://zerogpt.net/ai-content-detector"
+    },
+    {
+      "detector": "ZeroGPT",
+      "url": "https://zerogpt.net/ai-content-detector",
+      "scan_id": "long_technical_367w__original",
+      "sample_id": "long_technical_367w",
+      "variant": "original",
+      "characters": 2610,
+      "words": 367,
+      "status": "blocked_or_failed",
+      "error": "page.waitForURL: Timeout 120000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"**/results/**\" until \"load\"\n============================================================",
+      "final_url": "https://zerogpt.net/ai-content-detector"
+    },
+    {
+      "detector": "ZeroGPT",
+      "url": "https://zerogpt.net/ai-content-detector",
+      "scan_id": "long_technical_367w__humanized",
+      "sample_id": "long_technical_367w",
+      "variant": "humanized",
+      "characters": 2580,
+      "words": 355,
+      "status": "blocked_or_failed",
+      "error": "page.waitForURL: Timeout 120000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"**/results/**\" until \"load\"\n============================================================",
+      "final_url": "https://zerogpt.net/ai-content-detector"
+    }
+  ]
+}

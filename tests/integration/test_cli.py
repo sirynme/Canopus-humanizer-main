@@ -10,7 +10,7 @@ def test_cli_version(capsys):
         main(["--version"])
     assert exc_info.value.code == 0
     captured = capsys.readouterr()
-    assert "1.0.0" in captured.out
+    assert "4.2.0" in captured.out
 
 
 def test_cli_validate_rules(tmp_path, capsys):

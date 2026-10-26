@@ -59,6 +59,10 @@ class ResourceError(CanopusError):
     pass
 
 
+# Semantic alias for resource limits
+ResourceLimitError = ResourceError
+
+
 # Stable error code constants
 INPUT_INVALID = "INPUT_INVALID"
 INPUT_TOO_LARGE = "INPUT_TOO_LARGE"

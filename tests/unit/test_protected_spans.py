@@ -89,3 +89,17 @@ def test_mask_and_restore_fail_closed_on_dropped_placeholder():
     assert len(errors) > 0
     # Must fail closed and return original raw text
     assert restored == text
+
+
+def test_change_offsets_are_remapped_after_masking():
+    """Reported changes use offsets from the original source, not placeholders."""
+    from canopus_humanizer.engine.models import TransformRequest
+    from canopus_humanizer.engine.pipeline import Pipeline
+
+    text = "The result was 98.6% accurate due to the fact that we proceeded."
+    result = Pipeline().process(TransformRequest(text=text, ruleset_ids=("base",)))
+
+    assert result.accepted is True
+    change = next(c for c in result.changes if c.before.lower() == "due to the fact that")
+    assert text[change.start:change.end] == change.before
+    assert change.start == text.index("due to the fact that")

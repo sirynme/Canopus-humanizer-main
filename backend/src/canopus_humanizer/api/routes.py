@@ -29,7 +29,7 @@ from canopus_humanizer.rules.registry import RuleRegistry
 router = APIRouter(prefix="/v1", tags=["Humanizer & Canopus Engine"])
 
 _default_registry = RuleRegistry()
-_default_pipeline = Pipeline(registry=_default_registry, version="1.0.0")
+_default_pipeline = Pipeline(registry=_default_registry, version="4.2.0")
 _metrics_calculator = TextMetricsCalculator()
 _citation_validator = CitationValidator()
 _citation_formatter = CitationFormatter()

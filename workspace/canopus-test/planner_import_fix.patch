@@ -1,0 +1,12 @@
+diff --git a/backend/src/canopus_humanizer/engine/planner.py b/backend/src/canopus_humanizer/engine/planner.py
+index 4c282c5..localfix 100644
+--- a/backend/src/canopus_humanizer/engine/planner.py
++++ b/backend/src/canopus_humanizer/engine/planner.py
+@@ -1,7 +1,7 @@
+ """Deterministic change planning, conflict resolution, and change-budget enforcement."""
+ 
+-from typing import List, Sequence, Set, Tuple
++from typing import Any, List, Optional, Sequence, Set, Tuple
+ 
+ from canopus_humanizer.engine.errors import RULE_CONFLICT
+*** End Patch
