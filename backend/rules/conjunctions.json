@@ -1,0 +1,29 @@
+[
+  {
+    "__prompt__": "Role: Clause Reorder & Subordinate Sentence Identification.\nTask: List conjunctions and subordinate markers that introduce dependent clauses eligible for topological reordering."
+  },
+  "consequently",
+  "provided that",
+  "given that",
+  "assuming that",
+  "inasmuch as",
+  "insofar as",
+  "notwithstanding that",
+  "on condition that",
+  "so long as",
+  "in the event that",
+  "for the reason that",
+  "on the grounds that",
+  "in light of the fact that",
+  "considering that",
+  "granted that",
+  "supposing that",
+  "while",
+  "whereas",
+  "because",
+  "although",
+  "even though",
+  "since",
+  "unless",
+  "whereby"
+]

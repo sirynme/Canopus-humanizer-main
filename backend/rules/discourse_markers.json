@@ -1,0 +1,19 @@
+{
+  "__prompt__": "Role: Discourse Marker Rotation Engine.\nTask: Provide non-repetitive transitions for discourse markers preserving scholarly register.",
+  "However": ["Nevertheless", "Nonetheless", "On the other hand", "Yet", "In contrast"],
+  "Therefore": ["Consequently", "Hence", "As a result", "Accordingly", "Thus"],
+  "Moreover": ["Furthermore", "In addition", "Additionally", "Beyond this"],
+  "Furthermore": ["Moreover", "In addition", "Additionally", "Beyond this"],
+  "Although": ["Even though", "Despite the fact that", "Notwithstanding", "While"],
+  "Thus": ["Hence", "Accordingly", "Consequently", "In this manner"],
+  "Indeed": ["In fact", "Certainly", "Notably"],
+  "Similarly": ["Likewise", "Comparably", "By the same token"],
+  "Specifically": ["In particular", "More precisely", "Namely"],
+  "Notably": ["Significantly", "Importantly", "Remarkably"],
+  "Meanwhile": ["Concurrently", "Simultaneously", "During this period"],
+  "Conversely": ["In contrast", "By contrast", "On the contrary"],
+  "Ultimately": ["In the final analysis", "When all factors are considered"],
+  "Evidently": ["Clearly", "Apparent from the evidence", "Manifestly"],
+  "Essentially": ["Fundamentally", "In essence", "At its core"],
+  "Typically": ["Generally", "Ordinarily", "In most cases"]
+}

@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "ruleset_id": "technical",
+  "version": "1.0.0",
+  "language": "en",
+  "rules": [
+    {
+      "id": "technical.digital_era_001",
+      "enabled": true,
+      "category": "terminology",
+      "risk": "low",
+      "operation": "replace_exact",
+      "pattern": "in today's digital era",
+      "replacement": "in modern computational environments",
+      "case_sensitive": false,
+      "priority": 95,
+      "requires_review": false,
+      "preserve_case": true,
+      "source_note": "Replaces vague journalistic trope with technical domain context."
+    },
+    {
+      "id": "technical.comprehensive_tapestry_002",
+      "enabled": true,
+      "category": "clarity",
+      "risk": "low",
+      "operation": "replace_exact",
+      "pattern": "comprehensive tapestry",
+      "replacement": "structured synthesis",
+      "case_sensitive": false,
+      "priority": 95,
+      "requires_review": false,
+      "preserve_case": true,
+      "source_note": "Replaces LLM-cliché metaphor with precise technical term."
+    },
+    {
+      "id": "technical.lock_learning_rate_003",
+      "enabled": true,
+      "category": "terminology",
+      "risk": "low",
+      "operation": "terminology_lock",
+      "pattern": "learning rate",
+      "replacement": "",
+      "case_sensitive": false,
+      "priority": 100,
+      "requires_review": false,
+      "preserve_case": true,
+      "source_note": "Locks core machine learning hyperparameter term from mutation."
+    },
+    {
+      "id": "technical.lock_gradient_descent_004",
+      "enabled": true,
+      "category": "terminology",
+      "risk": "low",
+      "operation": "terminology_lock",
+      "pattern": "gradient descent",
+      "replacement": "",
+      "case_sensitive": false,
+      "priority": 100,
+      "requires_review": false,
+      "preserve_case": true,
+      "source_note": "Locks optimization algorithm name from synonym swapping."
+    },
+    {
+      "id": "technical.utilize_to_use_005",
+      "enabled": true,
+      "category": "clarity",
+      "risk": "low",
+      "operation": "replace_exact",
+      "pattern": "utilize",
+      "replacement": "use",
+      "case_sensitive": false,
+      "priority": 85,
+      "requires_review": false,
+      "preserve_case": true,
+      "source_note": "Technical writing clarity: prefer 'use' over 'utilize'."
+    },
+    {
+      "id": "technical.is_applicable_to_006",
+      "enabled": true,
+      "category": "clarity",
+      "risk": "low",
+      "operation": "replace_exact",
+      "pattern": "is applicable to",
+      "replacement": "applies to",
+      "case_sensitive": false,
+      "priority": 80,
+      "requires_review": false,
+      "preserve_case": true,
+      "source_note": "Simplifies copula construction into action verb."
+    }
+  ]
+}

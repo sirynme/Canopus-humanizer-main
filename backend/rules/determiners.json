@@ -1,0 +1,12 @@
+{
+  "__prompt__": "Role: Determiner Swapper.\nTask: Provide natural, grammatically compliant alternatives for high-frequency determiners preserving number agreement.",
+  "several": ["numerous", "a number of", "multiple"],
+  "many": ["numerous", "a substantial number of", "multiple"],
+  "some": ["certain", "particular", "specific"],
+  "few": ["a limited number of", "a small number of"],
+  "most": ["the majority of", "most of the"],
+  "each": ["every individual", "each respective"],
+  "both": ["the two", "the pair of"],
+  "another": ["an additional", "a further", "a supplementary"],
+  "other": ["alternative", "additional", "further"]
+}

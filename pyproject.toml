@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "canopus-humanizer"
+version = "1.0.0"
+description = "Deterministic, reviewable rule-based text humanization engine"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Canopus Core Engineering Team", email = "engine@canopus.org" }
+]
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "pydantic>=2.10.0",
+    "python-docx>=1.1.2",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.0.0",
+    "httpx>=0.27.0",
+]
+
+[project.scripts]
+canopus-humanizer = "canopus_humanizer.cli:main"
+canopus = "canopus_humanizer.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["backend/src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+pythonpath = ["backend/src", "."]

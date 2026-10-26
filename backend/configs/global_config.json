@@ -1,0 +1,37 @@
+{
+  "app_name": "canopus-humanizer Core",
+  "version": "2.6.0",
+  "environment": "production",
+  "pipeline_defaults": {
+    "intensity": 70.0,
+    "style": "academic",
+    "enable_synonyms": true,
+    "synonym_alignment": 0.85,
+    "random_alignment": false,
+    "enable_phrase_rewrite": true,
+    "enable_determiner_swap": true,
+    "enable_voice_transform": false,
+    "enable_sentence_fusion": true,
+    "enable_transition_inject": false,
+    "enable_clause_reorder": false,
+    "enable_nominalization": false,
+    "enable_appositive": false,
+    "enable_discourse_rotate": true,
+    "enable_contraction": false,
+    "enable_ngram_audit": false,
+    "enable_split_compound": false,
+    "enable_ai_tell_scrubber": true,
+    "voice_transform_rate": 0.0,
+    "sentence_fusion_rate": 0.20,
+    "transition_inject_rate": 0.0,
+    "word_reorder_rate": 0.0,
+    "nominalization_rate": 0.0,
+    "appositive_rate": 0.0,
+    "discourse_rotate_rate": 0.50
+  },
+  "api_settings": {
+    "auth_required": false,
+    "rate_limit_per_minute": 120,
+    "max_text_length": 50000
+  }
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canopus-humanizer — Text Humanizer</title>
+
+  <meta name="description" content="A clean, deterministic rule-based text humanizer with format protection.">
+
+
+
+  <!-- Modern Typography: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Design System Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Clean Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-content">
+      <a href="#" class="brand" aria-label="canopus-humanizer Home">
+
+        <div class="brand-title">
+          <span class="brand-name">CANOPUS HUMANIZER</span>
+          <span class="brand-pill">Text Humanizer</span>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <!-- Live Engine Status Indicator -->
+        <div class="status-indicator" id="apiStatusBadge" title="Backend Engine Status">
+          <span class="status-dot" id="statusDot"></span>
+          <span id="apiStatusText" class="status-label">Checking...</span>
+        </div>
+
+        <!-- Light / Dark Theme Toggle -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle Theme">
+          <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Headline -->
+  <section class="hero-section">
+    <h1 class="hero-title">Deterministic Text Humanizer</h1>
+    <p class="hero-subtitle">
+      Rule-based linguistic variation engine with format protection for LaTeX, code, and technical documents.
+    </p>
+  </section>
+
+  <!-- Main Application Workspace -->
+  <main class="app-container">
+
+    <!-- Unified Controls Toolbar -->
+    <div class="toolbar-card">
+      <div class="toolbar-left">
+        <span class="toolbar-heading">Writing Mode:</span>
+        <div class="mode-pills" role="radiogroup" aria-label="Writing Register">
+          <button type="button" class="mode-pill active" data-mode="academic">
+            <span>🎓</span> Academic
+          </button>
+          <button type="button" class="mode-pill" data-mode="technical">
+            <span>💼</span> Formal
+          </button>
+          <button type="button" class="mode-pill" data-mode="standard">
+            <span>⚡</span> Standard
+          </button>
+          <button type="button" class="mode-pill" data-mode="conversational">
+            <span>💬</span> Casual
+          </button>
+        </div>
+      </div>
+
+      <div class="toolbar-right">
+        <!-- Strength / Intensity Slider -->
+        <div class="strength-control">
+          <label for="intensitySlider" class="strength-label">
+            Strength: <strong id="intensityVal">75%</strong>
+          </label>
+          <input type="range" id="intensitySlider" class="strength-slider" min="25" max="100" value="75" step="5">
+        </div>
+
+        <!-- Optional Protected Terms Toggle -->
+        <button type="button" class="btn-subtle" id="togglePreserveBtn"
+          title="Preserve specific names or technical terms">
+          <span>🛡️ Preserve Terms</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Optional Collapsible Drawer for Protected Terms -->
+    <div class="preserve-drawer" id="preserveDrawer" style="display: none;">
+      <div class="preserve-content">
+        <label for="protectedTermsInput" class="preserve-label">Words or Names to Preserve (Unchanged):</label>
+        <div class="preserve-input-row">
+          <input type="text" id="protectedTermsInput" class="preserve-input"
+            placeholder="e.g. CRISPR, PyTorch, iPhone (comma separated)">
+          <span class="preserve-tip">These terms will remain untouched during transformation.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dual-Pane Workspace (Side-by-Side) -->
+    <div class="workspace-grid">
+
+      <!-- Left Card: Input -->
+      <div class="pane-card input-card">
+        <div class="pane-top">
+          <div class="pane-headline">
+            <span class="pane-icon">📄</span>
+            <span class="pane-text">Input Text</span>
+          </div>
+
+          <div class="pane-actions">
+            <button type="button" class="btn-tool" id="pasteBtn" title="Paste text from clipboard">
+              <span>📋</span> Paste
+            </button>
+            <button type="button" class="btn-tool" id="sampleBtn" title="Load sample text">
+              <span>✨</span> Sample
+            </button>
+            <label for="fileUploadInput" class="btn-tool" title="Upload a document (.txt, .docx, .md, .tex)">
+              <span>📁</span> Upload
+              <input type="file" id="fileUploadInput" accept=".txt,.docx,.md,.tex" style="display: none;">
+            </label>
+            <button type="button" class="btn-tool btn-danger-hover" id="clearBtn" title="Clear text">
+              <span>✕</span> Clear
+            </button>
+          </div>
+        </div>
+
+        <div class="editor-wrapper">
+          <textarea id="inputText" class="text-editor" placeholder="Paste or type your text here..."></textarea>
+          <div id="fileUploadNotice" class="file-notice" style="display: none;">
+            <span id="fileNoticeName">File loaded</span>
+            <button type="button" id="removeFileNoticeBtn" class="notice-close">✕</button>
+          </div>
+        </div>
+
+        <div class="pane-bottom">
+          <span class="count-badge" id="inputStats">0 words &bull; 0 characters</span>
+          <span class="hint-badge">Ready</span>
+        </div>
+      </div>
+
+      <!-- Right Card: Output -->
+      <div class="pane-card output-card">
+        <div class="pane-top">
+          <div class="pane-headline">
+            <span class="pane-icon">🛡️</span>
+            <span class="pane-text">Humanized Output</span>
+          </div>
+
+          <div class="pane-actions">
+            <button type="button" class="btn-tool" id="copyBtn" title="Copy humanized text">
+              <span>📋</span> Copy
+            </button>
+            <button type="button" class="btn-tool" id="downloadBtn" title="Download text as file">
+              <span>📥</span> Download
+            </button>
+          </div>
+        </div>
+
+        <div class="editor-wrapper">
+          <textarea id="outputText" class="text-editor" readonly
+            placeholder="Transformed text will appear here..."></textarea>
+        </div>
+
+        <div class="pane-bottom">
+          <div class="detection-badge" id="detectionBadge">
+            <span class="dot-score"></span>
+            <span id="scoreText">Ready</span>
+          </div>
+          <span class="count-badge" id="outputStats">0 words</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Center Primary Action Button -->
+    <div class="action-container">
+      <button type="button" class="btn-cta" id="humanizeBtn">
+        <span class="cta-icon" id="btnIcon">⚡</span>
+        <span class="cta-label" id="btnLabel">Humanize Text</span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Clean, Professional Footer -->
+  <footer class="app-footer">
+    <div class="footer-content">
+      <p>
+        <strong>canopus-humanizer</strong> &bull; Deterministic & Privacy-First Text Humanizer
+      </p>
+    </div>
+  </footer>
+
+  <!-- Application Script -->
+  <script src="script.js"></script>
+</body>
+
+</html>
