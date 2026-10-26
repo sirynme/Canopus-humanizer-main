@@ -1,6 +1,6 @@
 {
   "benchmark_version": "4.0.0",
-  "timestamp": 1793035656.9345133,
+  "timestamp": 1793036840.9593856,
   "total_samples": 7,
   "results": [
     {
@@ -13,11 +13,11 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 19.85,
+      "v4_latency_ms": 15.32,
       "legacy_changes_count": 5,
       "legacy_preservation_rate": 1.0,
       "legacy_banned_terms_detected": [],
-      "legacy_latency_ms": 11.75,
+      "legacy_latency_ms": 7.32,
       "readability": {
         "original_flesch": 41.19166666666669,
         "legacy_flesch": 21.73333333333335,
@@ -34,11 +34,11 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 5.25,
+      "v4_latency_ms": 7.32,
       "legacy_changes_count": 9,
       "legacy_preservation_rate": 1.0,
       "legacy_banned_terms_detected": [],
-      "legacy_latency_ms": 1.8,
+      "legacy_latency_ms": 1.64,
       "readability": {
         "original_flesch": 64.21993197278914,
         "legacy_flesch": 63.12560606060609,
@@ -55,13 +55,13 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 3.61,
+      "v4_latency_ms": 4.49,
       "legacy_changes_count": 15,
       "legacy_preservation_rate": 1.0,
       "legacy_banned_terms_detected": [
         "Importantly this trend"
       ],
-      "legacy_latency_ms": 3.5,
+      "legacy_latency_ms": 4.65,
       "readability": {
         "original_flesch": 36.14382113821139,
         "legacy_flesch": -18.852528735632177,
@@ -78,11 +78,11 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 3.46,
+      "v4_latency_ms": 4.43,
       "legacy_changes_count": 16,
       "legacy_preservation_rate": 0.5,
       "legacy_banned_terms_detected": [],
-      "legacy_latency_ms": 1.16,
+      "legacy_latency_ms": 1.68,
       "readability": {
         "original_flesch": 26.97750000000002,
         "legacy_flesch": 22.94892857142861,
@@ -99,7 +99,7 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 2.69,
+      "v4_latency_ms": 4.17,
       "legacy_changes_count": 17,
       "legacy_preservation_rate": 1.0,
       "legacy_banned_terms_detected": [
@@ -108,7 +108,7 @@
         "criteria is",
         "comprise of"
       ],
-      "legacy_latency_ms": 1.37,
+      "legacy_latency_ms": 2.64,
       "readability": {
         "original_flesch": 39.55500000000001,
         "legacy_flesch": 32.504999999999995,
@@ -125,11 +125,11 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 8.78,
+      "v4_latency_ms": 6.13,
       "legacy_changes_count": 23,
       "legacy_preservation_rate": 1.0,
       "legacy_banned_terms_detected": [],
-      "legacy_latency_ms": 5.14,
+      "legacy_latency_ms": 3.46,
       "readability": {
         "original_flesch": 37.385818181818195,
         "legacy_flesch": 21.50862686567166,
@@ -146,11 +146,11 @@
       "v4_transformation_rate": 1.0,
       "v4_banned_terms_detected": [],
       "v4_unnecessary_edits": 0,
-      "v4_latency_ms": 4.15,
+      "v4_latency_ms": 3.53,
       "legacy_changes_count": 24,
       "legacy_preservation_rate": 1.0,
       "legacy_banned_terms_detected": [],
-      "legacy_latency_ms": 1.06,
+      "legacy_latency_ms": 1.05,
       "readability": {
         "original_flesch": 43.35668604651164,
         "legacy_flesch": 47.2915697674419,
